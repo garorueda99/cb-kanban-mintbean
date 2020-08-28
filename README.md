@@ -34,3 +34,9 @@ No need for peer review if you know for sure this wont brick anything. Once you 
 - git checkout master
 - git pull origin master
 - and so on...
+
+## PROGRESS SO FAR
+
+- Added routing to "/" landing page component and "/board/ to go to the kanban board component
+- Added packages, redux, redux-react, styled-components, spring
+- Added GlobalStyles component that does our CSS Reset + Box Model sizing, imported "Lato" google fonts as default font.
