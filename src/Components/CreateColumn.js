@@ -9,12 +9,12 @@ import { addColumn } from "../actions";
 const StoreItem = () => {
   const id = uuid();
   let name = "New column";
+  const dispatch = useDispatch();
 
   const column = {
     name,
     items: [],
   };
-  const dispatch = useDispatch();
 
   return (
     <IconWrapper>

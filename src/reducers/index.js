@@ -3,7 +3,7 @@ import produce from "immer";
 
 const testItems = [
   { id: uuid(), content: "First task" },
-  // { id: uuid(), content: 'Second task' },
+  { id: uuid(), content: "Second task" },
   // { id: uuid(), content: 'Third task' },
   // { id: uuid(), content: 'Fourth task' },
   // { id: uuid(), content: 'Fifth task' },
@@ -29,11 +29,49 @@ const initialState = {
 
 export default function columnReducer(state = initialState, action) {
   switch (action.type) {
-    case "ADD_ITEM": {
+    case "ADD_COLUMN": {
       const { column, id } = action;
 
       return produce(state, (draftState) => {
         draftState.columns[id] = column;
+      });
+    }
+    case "UPDATE_COLUMN_POSITION_HORIZONTALLY": {
+      const {
+        columns,
+        sourceId,
+        sourceColumn,
+        sourceItems,
+        destinationId,
+        destColumn,
+        destItems,
+      } = action;
+
+      return produce(state, (draftState) => {
+        draftState.columns = {
+          ...columns,
+          [sourceId]: {
+            ...sourceColumn,
+            items: sourceItems,
+          },
+          [destinationId]: {
+            ...destColumn,
+            items: destItems,
+          },
+        };
+      });
+    }
+    case "UPDATE_COLUMN_POSITION_VERTICALLY": {
+      const { columns, sourceId, column, copiedItems } = action;
+
+      return produce(state, (draftState) => {
+        draftState.columns = {
+          ...columns,
+          [sourceId]: {
+            ...column,
+            items: copiedItems,
+          },
+        };
       });
     }
     default:
