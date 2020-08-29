@@ -1,55 +1,50 @@
 import React from "react";
 import styled from "styled-components";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import uuid from "uuid/v4";
 import Card from "../components/Card";
 import Sidebar from "./Sidebar";
 import { useSelector } from "react-redux";
+import { updateColumnPositionH, updateColumnPositionV } from "../actions";
+import { useDispatch } from "react-redux";
 
-const onDragEnd = (result, columns, setColumns) => {
-  if (!result.destination) return;
-  const { source, destination } = result;
+const Board = () => {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+  const { columns } = state;
 
-  if (source.droppableId !== destination.droppableId) {
-    const sourceColumn = columns[source.droppableId];
-    const destColumn = columns[destination.droppableId];
+  const onDragEnd = (result, columns) => {
+    if (!result.destination) return;
+    const { source, destination } = result;
+    const sourceId = source.droppableId;
+    const destinationId = destination.droppableId;
+    const sourceColumn = columns[sourceId];
+    const destColumn = columns[destinationId];
     const sourceItems = [...sourceColumn.items];
     const destItems = [...destColumn.items];
     const [removed] = sourceItems.splice(source.index, 1);
-    destItems.splice(destination.index, 0, removed);
-    setColumns({
-      ...columns,
-      [source.droppableId]: {
-        ...sourceColumn,
-        items: sourceItems,
-      },
-      [destination.droppableId]: {
-        ...destColumn,
-        items: destItems,
-      },
-    });
-  } else {
-    const column = columns[source.droppableId];
-    const copiedItems = [...column.items];
-    const [removed] = copiedItems.splice(source.index, 1);
-    copiedItems.splice(destination.index, 0, removed);
-    setColumns({
-      ...columns,
-      [source.droppableId]: {
-        ...column,
-        items: copiedItems,
-      },
-    });
-  }
-};
 
-const Board = () => {
-  const state = useSelector((state) => state);
-  // console.log("state", state);
+    if (sourceId !== destinationId) {
+      destItems.splice(destination.index, 0, removed);
 
-  const [{ columns }, setColumns] = React.useState(state);
-  // console.log('columns====>', columns);
-  // console.log('state', state);
+      dispatch(
+        updateColumnPositionH(
+          columns,
+          sourceId,
+          sourceColumn,
+          sourceItems,
+          destinationId,
+          destColumn,
+          destItems
+        )
+      );
+    } else {
+      const column = columns[sourceId];
+      const copiedItems = [...column.items];
+      const [removed] = copiedItems.splice(source.index, 1);
+      copiedItems.splice(destination.index, 0, removed);
+      dispatch(updateColumnPositionV(columns, sourceId, column, copiedItems));
+    }
+  };
 
   return !columns ? (
     <div>Loading...</div>
@@ -57,11 +52,8 @@ const Board = () => {
     <div style={{ display: "flex" }}>
       <Sidebar />
       <StyledDiv>
-        <DragDropContext
-          onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
-        >
+        <DragDropContext onDragEnd={(result) => onDragEnd(result, columns)}>
           {Object.entries(columns).map(([columnId, column], index) => {
-            // console.log('column ID==>', columnId, 'COLUMN =>', column);
             return (
               <div
                 style={{
@@ -106,10 +98,8 @@ const Board = () => {
                                       {...provided.dragHandleProps}
                                       style={{
                                         position: "relative",
-                                        // userSelect: 'none',
                                         padding: 16,
                                         margin: "0 0 8px 0",
-                                        // minHeight: '50px',
                                         boxShadow: snapshot.isDragging
                                           ? "0px 0px 13px -1px rgba(168,168,168,0.6)"
                                           : "0px 0px 13px -1px rgba(168,168,168,0.3)",

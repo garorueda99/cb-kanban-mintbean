@@ -25,8 +25,9 @@ const Sidebar = () => {
 };
 
 const StyledAside = styled.aside`
-  min-width: 180px;
+  min-width: 140px;
   border-right: 1px solid gainsboro;
+  margin-right: 40px;
 `;
 
 const StyledDiv = styled.div`
