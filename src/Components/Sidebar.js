@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import CreateColumn from "./CreateColumn";
 
 import { FiHome } from "react-icons/fi";
 
@@ -17,8 +18,7 @@ const Sidebar = () => {
           </StyledLi>
         </StyledUl>
 
-        <StyledButton>New Column</StyledButton>
-        <StyledButton>New Task</StyledButton>
+        <CreateColumn />
       </StyledDiv>
     </StyledAside>
   );
@@ -60,20 +60,6 @@ const StyledUl = styled.ul`
 const StyledLi = styled.li`
   margin: 5px 0 5px 5px;
   padding: 8px;
-`;
-
-const StyledButton = styled.button`
-  background-color: blue;
-  border-radius: 30px;
-  color: white;
-  border: none;
-  padding: 5px;
-  width: 80%;
-  margin: 10px;
-
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 export default Sidebar;

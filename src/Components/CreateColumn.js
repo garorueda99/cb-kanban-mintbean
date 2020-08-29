@@ -2,27 +2,48 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import uuid from "uuid/v4";
+import { FiPlusCircle } from "react-icons/fi";
 
 import { addColumn } from "../actions";
 
-const id = uuid();
-const name = "New column";
+const StoreItem = () => {
+  const id = uuid();
+  let name = "New column";
 
-const column = {
-  [id]: {
+  const column = {
     name,
     items: [],
-  },
-};
-
-const StoreItem = ({ id, name }) => {
+  };
   const dispatch = useDispatch();
 
   return (
-    <button onClick={() => dispatch(addColumn({ id, column }))}>
-      Add column
-    </button>
+    <IconWrapper>
+      <CircleIcon
+        onClick={() => {
+          return dispatch(addColumn(column, id));
+        }}
+      />
+      <IconText>Add new column</IconText>
+    </IconWrapper>
   );
 };
+
+const IconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const CircleIcon = styled(FiPlusCircle)`
+  margin: 5px;
+  &:hover {
+    cursor: pointer;
+    color: #0acc33;
+  }
+`;
+
+const IconText = styled.span`
+  font-size: 12px;
+`;
 
 export default StoreItem;
