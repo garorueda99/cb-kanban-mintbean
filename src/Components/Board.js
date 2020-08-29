@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import uuid from 'uuid/v4';
@@ -71,6 +71,7 @@ const onDragEnd = (result, columns, setColumns) => {
 
 const Board = () => {
   const [columns, setColumns] = React.useState(testColumns);
+  const [buttonState, setButtonState] = useState(true);
 
   return (
     <StyledDiv>
@@ -154,6 +155,14 @@ const Board = () => {
           );
         })}
       </DragDropContext>
+      <button
+        style={{ position: 'absolute', top: '0' }}
+        onClick={() => setButtonState((n) => !n)}
+      >
+        {' '}
+        modal
+      </button>
+      <Card state={buttonState} />
     </StyledDiv>
   );
 };
