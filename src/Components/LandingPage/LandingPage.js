@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const LandingPage = () => {
   return (
@@ -8,7 +8,7 @@ const LandingPage = () => {
 
       <div>
         <LaunchButton>
-          <a href="/board">Launch</a>
+          <a href='/board'>Launch</a>
         </LaunchButton>
       </div>
     </Wrapper>
