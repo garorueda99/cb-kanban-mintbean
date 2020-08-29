@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // ### IMPORT COMPONENTS ###
 import GlobalStyles from "./components/GlobalStyles";
 import Board from "./components/Board";
-import LandingPage from "./components/LandingPage/LandingPage";
+import LandingPage from "./components/LandingPage";
 
 function App() {
   return (
