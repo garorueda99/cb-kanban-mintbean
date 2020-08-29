@@ -1,61 +1,49 @@
 import React from "react";
 import styled from "styled-components";
 
-// ### MATERIAL UI IMPORTS ###
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import Logo from "../../assets/cbLogo.png";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+import { HeaderSponsors } from "./HeaderSponsors";
+import COLORS from "../COLORS";
 
 const Header = () => {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <NavLogo src={Logo} />
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          ></IconButton>
-          <Typography variant="h6" className={classes.title}>
-            The Reducers
-          </Typography>
-          <Button color="inherit">
-            <ButtonLink href="/board">Launch</ButtonLink>
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </div>
+    <Wrapper>
+      <Left>
+        <PageTitle unselectable="on">The Reducers</PageTitle>
+      </Left>
+      <Right>
+        <HeaderSponsors />
+      </Right>
+    </Wrapper>
   );
 };
 
-const NavLogo = styled.img`
-  width: 42px;
-  height: 42px;
+const Wrapper = styled.div`
+  position: relative;
+  align-items: center;
+  display: flex;
+  height: 80px;
+  /* border: 5px solid red; */
 `;
 
-const ButtonLink = styled.a`
-  text-decoration: none;
-  color: inherit;
+const Left = styled.div`
+  margin-left: 5%;
+  flex: 4;
+  /* border: 1px dashed red; */
+`;
+
+const Right = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  /* border: 1px dashed red; */
+  margin-right: 5%;
+  flex: 6;
+`;
+
+const PageTitle = styled.h1`
+  user-select: none;
+  font-size: 44px;
+  font-weight: 500;
+  color: ${COLORS.btnPrimary};
 `;
 
 export default Header;

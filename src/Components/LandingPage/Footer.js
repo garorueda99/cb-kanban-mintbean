@@ -1,26 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import COLORS from "../COLORS";
 
 const Footer = () => {
   return (
     <Wrapper>
-      <List>
-        <li>
-          <Link target="_blank" href="https://concordiabootcamps.ca/">
-            Concordia Bootcamp
-          </Link>
-        </li>
-        <li>
-          <Link target="_blank" href="https://www.mintbean.io/">
-            Mintbean
-          </Link>
-        </li>
-        <li>
-          <Link target="_blank" href="https://featurepeek.com/">
-            FeaturePeek
-          </Link>
-        </li>
-      </List>
+      <FooterTitle>This is only a demo</FooterTitle>
     </Wrapper>
   );
 };
@@ -33,27 +18,14 @@ const Wrapper = styled.div`
   bottom: 0;
   justify-content: center;
   align-items: center;
-  background-color: #3f51b5;
+  background-color: ${COLORS.btnPrimary};
   height: 10vh;
 `;
 
-const List = styled.ul`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  & li {
-    padding: 0 20px;
-  }
-`;
-
-const Link = styled.a`
-  text-decoration: none;
+const FooterTitle = styled.h1`
   color: white;
-
-  &:hover {
-    text-decoration: underline;
-  }
+  font-size: 16px;
+  font-weight: 400;
 `;
 
 export default Footer;
