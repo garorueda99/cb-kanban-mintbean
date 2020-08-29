@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
 
@@ -9,7 +9,7 @@ const GlobalStyles = createGlobalStyle`
 
 /* GOOGLE FONTS HERE */
 @import url('https://fonts.googleapis.com/css?family=Lato');
-
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 *, *:before, *:after {
   box-sizing: inherit;
 }
@@ -38,7 +38,7 @@ time, mark, audio, video {
   font-size: 100%;
 	/* font-family: 'Lato',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
   vertical-align: baseline;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
