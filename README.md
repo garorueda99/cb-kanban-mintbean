@@ -40,3 +40,36 @@ No need for peer review if you know for sure this wont brick anything. Once you 
 - Added routing to "/" landing page component and "/board/ to go to the kanban board component
 - Added packages, redux, redux-react, styled-components, spring
 - Added GlobalStyles component that does our CSS Reset + Box Model sizing, imported "Lato" google fonts as default font.
+
+# FEATURES TO IMPLEMENT
+
+- ~~When the application starts, you have 3 empty columns: "Todo", "In progress", "Done"~~
+
+- Each column has a "+" button. The user can click this button to create a task card in any column
+
+- ~~Task cards clearly display the title of the contained task~~
+
+- ~~The user can move tasks between columns using drag-and-drop~~
+
+- The user can delete a task.
+
+- The user can expand a task card to see its description
+
+- ~~The user can move tasks between columns using the "Move" button in the context menu~~
+
+- The user can edit column titles
+
+- The user can create columns
+
+- The user can change the order of columns using drag-and-drop
+
+- The user can delete columns (you will have to decide what happens to a column's cards in this case)
+
+- Add additional UI to enhance UX like
+
+  - Tooltips
+  - Clear All
+  - Info bubble
+
+- Create a landing Page
+  - Link to Dev's social media
