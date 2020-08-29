@@ -1,6 +1,9 @@
 import React, { Children } from 'react';
 import styled, { keyframes } from 'styled-components';
 
+import { makeStyles } from '@material-ui/core/styles';
+import Avatar from '@material-ui/core/Avatar';
+
 const close = keyframes`
 0%{
  transform: translate(50%, -50%) scale(0.25);
@@ -23,6 +26,10 @@ export default function Card({ children, state, setState }) {
         display: !state ? 'inline' : 'none',
       }}
     >
+      <Avatar
+        alt='user'
+        src="'../../../public/static/images/avatar/avatar1.png'"
+      />
       {children}
       <Button
         onClick={() => {
@@ -48,7 +55,7 @@ const CardWrapper = styled.div`
     rgba(251, 224, 2, 1) 94%,
     rgba(255, 226, 0, 1) 100%
   );
-  box-shadow: 0 2rem 5rem 0 #888888;
+  box-shadow: 0 10px 15px 0 #888888;
   border-radius: 12px;
   animation: ${close} 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
   animation-fill-mode: forwards;
