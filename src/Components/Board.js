@@ -10,6 +10,7 @@ const testItems = [
   { id: uuid(), content: 'Third task' },
   { id: uuid(), content: 'Fourth task' },
   { id: uuid(), content: 'Fifth task' },
+  { id: uuid(), content: 'TEST' },
 ];
 
 const testColumns = {
@@ -83,10 +84,11 @@ const Board = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
+                border: '2px solid purple',
               }}
               key={columnId}
             >
-              <h2>{column.name}</h2>
+              <input value={column.name} />
 
               <div style={{ margin: 8 }}>
                 <Droppable droppableId={columnId} key={columnId}>
@@ -102,6 +104,7 @@ const Board = () => {
                           padding: 4,
                           width: 250,
                           minHeight: 500,
+                          border: '2px solid green',
                         }}
                       >
                         {column.items.map((item, index) => {
@@ -113,21 +116,29 @@ const Board = () => {
                             >
                               {(provided, snapshot) => {
                                 return (
-                                  <Card
+                                  <div
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                     style={{
-                                      userselect: 'none',
+                                      position: 'relative',
+                                      // userSelect: 'none',
+                                      padding: 16,
+                                      margin: '0 0 8px 0',
+                                      // minHeight: '50px',
                                       boxShadow: snapshot.isDragging
                                         ? '0px 0px 13px -1px rgba(168,168,168,0.6)'
                                         : '0px 0px 13px -1px rgba(168,168,168,0.3)',
+                                      color: '#000',
+                                      borderRadius: '10px',
+                                      border: '2px solid pink',
                                       ...provided.draggableProps.style,
                                     }}
-                                    // WHAT IS THIS FOR??? ASK BY ANDRES RUEDA
                                   >
+                                    {/* <Card> */}
                                     {item.content}
-                                  </Card>
+                                    {/* </Card> */}
+                                  </div>
                                 );
                               }}
                             </Draggable>
