@@ -1,11 +1,16 @@
 export const addColumn = (column, id) => ({
-  type: "ADD_COLUMN",
+  type: 'ADD_COLUMN',
   column,
   id,
 });
 
+export const addCard = (columnId) => ({
+  type: 'ADD_CARD',
+  columnId,
+});
+
 export const removeColumn = (id) => ({
-  type: "REMOVE_COLUMN",
+  type: 'REMOVE_COLUMN',
   id,
 });
 
@@ -18,7 +23,7 @@ export const updateColumnPositionH = (
   destColumn,
   destItems
 ) => ({
-  type: "UPDATE_COLUMN_POSITION_HORIZONTALLY",
+  type: 'UPDATE_COLUMN_POSITION_HORIZONTALLY',
   columns,
   sourceId,
   sourceColumn,
@@ -34,7 +39,7 @@ export const updateColumnPositionV = (
   column,
   copiedItems
 ) => ({
-  type: "UPDATE_COLUMN_POSITION_VERTICALLY",
+  type: 'UPDATE_COLUMN_POSITION_VERTICALLY',
   columns,
   sourceId,
   column,

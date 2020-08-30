@@ -43,6 +43,17 @@ export default function columnReducer(state = initialState, action) {
         delete draftState[id];
       });
     }
+
+    case "ADD_CARD": {
+      const { columnId } = action;
+
+      return produce(state, (draftState) => {
+        draftState.columns[columnId].items.push({
+          id: uuid(),
+          content: "New Task",
+        });
+      });
+    }
     case "UPDATE_COLUMN_POSITION_HORIZONTALLY": {
       const {
         columns,
