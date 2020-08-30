@@ -29,8 +29,7 @@ export default function Card({
   // const items = useSelector((state) => state.columns[columnId].items);
   // const objectFinder = (element) => element.id === item.id;
   // const index = items.findIndex(objectFinder);
-  // console.log('===>', items[index]);
-  // const [info, setInfo] = useState(items[index].task);
+  const [info, setInfo] = useState(item.task);
   console.log('===>', !item);
   const [title, setTitle] = useState(children);
   // const dispatch = useDispatch();
@@ -48,9 +47,9 @@ export default function Card({
               rows={4}
               defaultValue={item.task}
               variant='outlined'
-              // onChange={(e) => {
-              //   setInfo(e.target.value);
-              // }}
+              onChange={(e) => {
+                setInfo(e.target.value);
+              }}
             />
             <Button
               variant='contained'

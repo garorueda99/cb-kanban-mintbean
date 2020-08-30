@@ -23,6 +23,7 @@ const Board = () => {
   const columns = useSelector((state) => state.columns);
   const [cardStatus, setCartStatus] = useState(false);
   const [cardItem, setCardItem] = useState(false);
+  const [columnCard, setColumnCard] = useState(null);
   const boardName = useSelector((state) => {
     console.log('current kanban name is:', state.kanbanName);
     return state.kanbanName;
@@ -67,7 +68,7 @@ const Board = () => {
 
   React.useEffect(() => {
     console.log(window.location);
-    if (window.location.pathname === "/board") {
+    if (window.location.pathname === '/board') {
       dispatch(toggleBoardForm());
     }
   }, []);
@@ -147,6 +148,7 @@ const Board = () => {
                                           onClick={() => {
                                             setCartStatus((n) => !n);
                                             setCardItem(item);
+                                            setColumnCard(columnId);
                                           }}
                                         >
                                           <BiEdit />
@@ -170,7 +172,13 @@ const Board = () => {
           </DragDropContext>
         </ColumnsContainer>
       </BoardContainer>
-      {cardStatus && <Card item={cardItem} />}
+      {cardStatus && (
+        <Card
+          item={cardItem}
+          cardStatus={cardStatus}
+          setCardStatus={setCartStatus}
+        />
+      )}
     </Wrapper>
   );
 };
