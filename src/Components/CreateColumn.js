@@ -1,14 +1,14 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import styled from "styled-components";
-import uuid from "uuid/v4";
-import { FiPlusCircle } from "react-icons/fi";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import uuid from 'uuid/v4';
+import { FiPlusCircle } from 'react-icons/fi';
 
-import { addColumn } from "../actions";
+import { addColumn } from '../actions';
 
 const StoreItem = () => {
   const id = uuid();
-  let name = "New column";
+  let name = 'New column';
   const dispatch = useDispatch();
 
   const column = {
@@ -20,7 +20,7 @@ const StoreItem = () => {
     <IconWrapper>
       <CircleIcon
         onClick={() => {
-          return dispatch(addColumn(column, id));
+          dispatch(addColumn(column, id));
         }}
       />
       <IconText>Add new column</IconText>

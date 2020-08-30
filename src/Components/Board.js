@@ -8,6 +8,7 @@ import { updateColumnPositionH, updateColumnPositionV } from '../actions';
 import { useDispatch } from 'react-redux';
 import { FiPlusCircle } from 'react-icons/fi';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { addCard } from '../actions';
 
 const Board = () => {
   const dispatch = useDispatch();
@@ -71,12 +72,14 @@ const Board = () => {
                 <div style={{ margin: 8 }}>
                   <CircleIcon
                     onClick={() => {
-                      console.log('New Card Added');
+                      // console.log('New Card Added', columnId);
+                      dispatch(addCard(columnId));
+                      console.log('STATE==>', state);
                     }}
                   />
                   <CircleIconX
                     onClick={() => {
-                      console.log('New Card Added');
+                      console.log('New Card Delete column');
                     }}
                   />
                   <Droppable droppableId={columnId} key={columnId}>
