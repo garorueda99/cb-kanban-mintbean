@@ -6,6 +6,8 @@ const COLORS = {
 
   outlinePrimary: "#90b4ce",
   outlineSecondary: "#3da9fc",
+
+  outlineGrey: "#5f6c7b",
 };
 
 export default COLORS;

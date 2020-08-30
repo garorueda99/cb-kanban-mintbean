@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import Card from "../../components/Card";
+import Card from "../Card";
 import Sidebar from "../Sidebar";
 import { useSelector } from "react-redux";
 import { updateColumnPositionH, updateColumnPositionV } from "../../actions";
@@ -163,9 +163,10 @@ const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 4px solid ${COLORS.btnPrimary};
+  border: 1px solid gainsboro;
   border-radius: 20px;
-  margin: 2%;
+  margin: 12px;
+  box-shadow: 0px 2px 2px 2px rgba(211, 211, 211, 0.75);
 `;
 
 const TasksContainer = styled.div`

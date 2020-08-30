@@ -41,7 +41,11 @@ const Wrapper = styled.div`
   align-items: center;
   /* margin: 8px; */
   /* border: 2px dashed purple; */
-  border-bottom: 5px solid ${COLORS.btnPrimary};
+  /* background-color: dodgerblue; */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  /* padding: 2px; */
+  /* border: 1px solid ${COLORS.outlineGrey}; */
 `;
 
 const HeaderInput = styled.input`
@@ -52,7 +56,10 @@ const HeaderInput = styled.input`
   line-height: 1.6;
   text-align: center;
   border: none;
+  /* color: white; */
+  background-color: inherit;
   &:focus {
+    /* background-color: ${COLORS.outlineGrey}; */
     outline: 1px solid ${COLORS.outlineSecondary};
   }
 `;
