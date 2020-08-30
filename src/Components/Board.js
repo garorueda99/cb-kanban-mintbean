@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { FiPlusCircle } from "react-icons/fi";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { addCard } from "../actions";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Board = () => {
   const dispatch = useDispatch();
@@ -53,24 +54,23 @@ const Board = () => {
     }
   };
 
-  return !columns ? (
-    <div>Loading...</div>
-  ) : (
-    <div style={{ display: "flex" }}>
+  if (!columns) {
+    return (
+      <Loading>
+        <LoadingTitle>Loading App... one moment please...</LoadingTitle>
+        <CircularProgress size={100} />
+      </Loading>
+    );
+  }
+
+  return (
+    <Wrapper style={{ display: "flex" }}>
       <Sidebar />
-      <StyledDiv>
+      <BoardContainer>
         <DragDropContext onDragEnd={(result) => onDragEnd(result, columns)}>
           {Object.entries(columns).map(([columnId, column], index) => {
             return (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  border: "2px solid purple",
-                }}
-                key={columnId}
-              >
+              <ColumnContainer key={columnId}>
                 <input value={column.name} />
 
                 <div style={{ margin: 8 }}>
@@ -145,20 +145,50 @@ const Board = () => {
                     }}
                   </Droppable>
                 </div>
-              </div>
+              </ColumnContainer>
             );
           })}
         </DragDropContext>
-      </StyledDiv>
-    </div>
+      </BoardContainer>
+    </Wrapper>
   );
 };
 
-const StyledDiv = styled.div`
+const Wrapper = styled.div`
+  position: relative;
+  /* overflow: visible; */
+
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    width: 0;
+    display: none;
+  }
+`;
+
+const BoardContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  height: 100vh;
+  max-height: 100vh;
+  /* border: 5px solid goldenrod; */
+  overflow: auto;
+  padding: 0 20px;
+
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    width: 0;
+    display: none;
+  }
+`;
+
+const ColumnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid purple;
 `;
 
 const CircleIcon = styled(FiPlusCircle)`
@@ -176,6 +206,19 @@ const CircleIconX = styled(AiOutlineCloseCircle)`
     cursor: pointer;
     color: #0acc33;
   }
+`;
+
+const Loading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+const LoadingTitle = styled.h1`
+  font-size: 22px;
+  margin: 50px 0;
 `;
 
 export default Board;
