@@ -66,7 +66,6 @@ const Board = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  border: '2px solid purple',
                 }}
                 key={columnId}
               >
@@ -101,7 +100,6 @@ const Board = () => {
                             padding: 4,
                             width: 250,
                             minHeight: 500,
-                            border: '2px solid green',
                           }}
                         >
                           {column.items.map((item, index) => {
@@ -130,9 +128,9 @@ const Board = () => {
                                         ...provided.draggableProps.style,
                                       }}
                                     >
-                                      <Card item={item} columnId={columnId}>
-                                        {item.content}
-                                      </Card>
+                                      {/* <Card item={item} columnId={columnId}> */}
+                                      {item.content}
+                                      {/* </Card> */}
                                     </div>
                                   );
                                 }}
