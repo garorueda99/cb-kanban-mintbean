@@ -1,20 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import Card from "../components/Card";
-import Sidebar from "./Sidebar";
+import Card from "../../components/Card";
+import Sidebar from "../Sidebar";
 import { useSelector } from "react-redux";
-import {
-  updateColumnPositionH,
-  updateColumnPositionV,
-  removeColumn,
-} from "../actions";
+import { updateColumnPositionH, updateColumnPositionV } from "../../actions";
 import { useDispatch } from "react-redux";
-import { FiPlusCircle, FiXCircle } from "react-icons/fi";
-import { AiOutlineCloseCircle } from "react-icons/ai";
-import { addCard } from "../actions";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import COLORS from "./COLORS";
+import COLORS from "../COLORS";
+
+//## COMPONENTS ##
+import { ColumnHeader } from "./ColumnHeader";
 
 const Board = () => {
   const dispatch = useDispatch();
@@ -64,52 +60,29 @@ const Board = () => {
   }
 
   return (
-    <Wrapper style={{ display: "flex" }}>
+    <Wrapper>
       <Sidebar />
       <BoardContainer>
         <DragDropContext onDragEnd={(result) => onDragEnd(result, columns)}>
           {Object.entries(columns).map(([columnId, column], index) => {
+            const hasTasks = columns[columnId].items.length <= 0;
             return (
               <ColumnContainer key={columnId}>
-                <ColumnHeader>
-                  <AddButton
-                    onClick={() => {
-                      // console.log('New Card Added', columnId);
-                      dispatch(addCard(columnId));
-                    }}
-                  >
-                    <FiPlusCircle size={32} />
-                  </AddButton>
-
-                  <HeaderInput value={column.name} />
-                  {/* <div style={{ margin: 8 }}> */}
-
-                  <ClosedButton
-                    onClick={() => {
-                      console.log("length", columns[columnId].items.length);
-                      if (columns[columnId].items.length <= 0) {
-                        console.log("column id", columnId);
-                        dispatch(removeColumn(columnId));
-                      }
-                    }}
-                  >
-                    <FiXCircle size={32} />
-                  </ClosedButton>
-                </ColumnHeader>
+                <ColumnHeader
+                  id={columnId}
+                  name={column.name}
+                  isEmpty={hasTasks}
+                />
                 <Droppable droppableId={columnId} key={columnId}>
                   {(provided, snapshot) => {
                     return (
-                      <div
+                      <TasksContainer
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                         style={{
                           border: snapshot.isDraggingOver
                             ? "1px solid gainsboro"
                             : "1px solid white",
-                          padding: 4,
-                          width: 250,
-                          minHeight: 500,
-                          border: "2px solid green",
                         }}
                       >
                         {column.items.map((item, index) => {
@@ -121,39 +94,31 @@ const Board = () => {
                             >
                               {(provided, snapshot) => {
                                 return (
-                                  <div
+                                  <TaskItem
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                     style={{
-                                      position: "relative",
-                                      padding: 16,
-                                      margin: "0 0 8px 0",
                                       boxShadow: snapshot.isDragging
                                         ? "0px 0px 13px -1px rgba(168,168,168,0.6)"
                                         : "0px 0px 13px -1px rgba(168,168,168,0.3)",
-                                      color: "#000",
-                                      borderRadius: "10px",
-                                      border: "2px solid pink",
                                       ...provided.draggableProps.style,
                                     }}
                                   >
                                     <Card item={item} columnId={columnId}>
                                       {item.content}
                                     </Card>
-                                  </div>
+                                  </TaskItem>
                                 );
                               }}
                             </Draggable>
                           );
                         })}
                         {provided.placeholder}
-                      </div>
+                      </TasksContainer>
                     );
                   }}
                 </Droppable>
-
-                {/* </div> */}
               </ColumnContainer>
             );
           })}
@@ -165,6 +130,7 @@ const Board = () => {
 
 const Wrapper = styled.div`
   position: relative;
+  display: flex;
   /* overflow: visible; */
 
   -ms-overflow-style: none; /* Internet Explorer 10+ */
@@ -197,81 +163,25 @@ const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid purple;
+  border: 4px solid ${COLORS.btnPrimary};
+  border-radius: 20px;
+  margin: 2%;
 `;
 
-const ColumnHeader = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 8px;
-  border: 2px dashed purple;
+const TasksContainer = styled.div`
+  padding: 4px;
+  width: 250px;
+  min-height: 500px;
+  border: 5px solid green;
 `;
 
-const HeaderInput = styled.input`
-  width: 80%;
-  padding: 3%;
-  font-size: 18px;
-  line-height: 1.6;
-  text-align: center;
-`;
-
-const AddButton = styled.button`
-  background: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-
-  &:hover {
-    color: ${COLORS.btnAdd};
-  }
-
-  &:focus {
-    color: ${COLORS.btnAdd};
-  }
-
-  &:active {
-    transform: scale(1.1);
-    color: ${COLORS.btnAdd};
-  }
-`;
-
-const ClosedButton = styled.button`
-  background: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-
-  &:hover {
-    color: ${COLORS.btnClose};
-  }
-
-  &:focus {
-    color: ${COLORS.btnClose};
-  }
-
-  &:active {
-    transform: scale(1.1);
-    color: ${COLORS.btnClose};
-  }
-`;
-
-const AddTaskBtn = styled(FiPlusCircle)`
-  margin: 5px;
-  background-color: blue;
-  cursor: pointer;
-  &:hover {
-    color: #0acc33;
-  }
-`;
-
-const RemoveColumnBtn = styled(FiXCircle)`
-  /* background-color: red; */
-  margin: 5px;
-  &:hover {
-    cursor: pointer;
-    color: #0acc33;
-  }
+const TaskItem = styled.div`
+  position: relative;
+  padding: 16px;
+  margin: 0 0 8px 0;
+  color: #000;
+  border-radius: 10px;
+  border: 2px solid pink;
 `;
 
 const Loading = styled.div`
