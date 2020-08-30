@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import styled, { keyframes } from 'styled-components';
-import Header from './Header';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { saveCardInfo } from '../../actions';
+import React, { useState } from "react";
+import styled, { keyframes } from "styled-components";
+import Header from "./Header";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { saveCardInfo } from "../../actions";
 
 const close = keyframes`
 0%{
@@ -22,7 +22,6 @@ export default function Card({ children, columnId, item }) {
   const items = useSelector((state) => state.columns[columnId].items);
   const objectFinder = (element) => element.id === item.id;
   const index = items.findIndex(objectFinder);
-  console.log('===>', items[index]);
   const [info, setInfo] = useState(items[index].task);
   const [title, setTitle] = useState(children);
   const dispatch = useDispatch();
@@ -32,18 +31,18 @@ export default function Card({ children, columnId, item }) {
       <Header title={children} setTitle={setTitle} />
       <ContentWrapper>
         <TextField
-          id='outlined-multiline-static'
-          label='Description'
+          id="outlined-multiline-static"
+          label="Description"
           multiline
           rows={4}
           defaultValue={info}
-          variant='outlined'
+          variant="outlined"
           onChange={(e) => {
             setInfo(e.target.value);
           }}
         />
         <Button
-          variant='contained'
+          variant="contained"
           onClick={() => {
             dispatch(saveCardInfo(columnId, item, info, title));
           }}
