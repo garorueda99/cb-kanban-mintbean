@@ -88,6 +88,7 @@ const Wrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  height: 100%;
 `;
 
 const Container = styled.div`
