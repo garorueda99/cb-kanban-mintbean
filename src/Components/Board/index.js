@@ -101,6 +101,9 @@ const Board = () => {
                     id={columnId}
                     name={column.name}
                     isEmpty={hasTasks}
+                    setCardStatus={setCartStatus}
+                    setCardItem={setCardItem}
+                    setColumnCard={setColumnCard}
                   />
                   <Droppable droppableId={columnId} key={columnId}>
                     {(provided, snapshot) => {

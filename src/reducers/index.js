@@ -118,7 +118,6 @@ export default function columnReducer(state = initialState, action) {
       const { columnId, itemId } = action;
       const objectFinder = (element) => element.id === itemId;
       const index = state.columns[columnId].items.findIndex(objectFinder);
-      console.log("I'm Here", index, state.columns[columnId].items);
       return produce(state, (draftState) => {
         draftState.columns[columnId].items.splice(index, 1);
       });

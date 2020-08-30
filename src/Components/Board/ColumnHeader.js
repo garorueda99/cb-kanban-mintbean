@@ -1,37 +1,45 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
-import { addCard, removeColumn } from "../../actions";
-import { useDispatch } from "react-redux";
-import { FiPlusCircle, FiXCircle } from "react-icons/fi";
-import COLORS from "../COLORS";
+import { addCard, removeColumn } from '../../actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { FiPlusCircle, FiXCircle } from 'react-icons/fi';
+import COLORS from '../COLORS';
 
 // ## FOR SNACKBAR MESSAGES
-import Button from "@material-ui/core/Button";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-import { makeStyles } from "@material-ui/core/styles";
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
 
 //## TOOLTIPS
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/material.css";
-import "tippy.js/animations/scale-subtle.css";
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/themes/material.css';
+import 'tippy.js/animations/scale-subtle.css';
 
 function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} variant='filled' {...props} />;
 }
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%",
-    "& > * + *": {
+    width: '100%',
+    '& > * + *': {
       marginTop: theme.spacing(2),
     },
   },
 }));
 
-export const ColumnHeader = ({ id, name, isEmpty }) => {
+export const ColumnHeader = ({
+  id,
+  name,
+  isEmpty,
+  setCardStatus,
+  setCardItem,
+  setColumnCard,
+}) => {
+  const columns = useSelector((state) => state.columns);
   const [formName, setFormName] = useState(name);
   const [open, setOpen] = React.useState(false);
 
@@ -43,7 +51,7 @@ export const ColumnHeader = ({ id, name, isEmpty }) => {
   };
 
   const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
+    if (reason === 'clickaway') {
       return;
     }
     setOpen(false);
@@ -52,10 +60,10 @@ export const ColumnHeader = ({ id, name, isEmpty }) => {
   return (
     <Wrapper>
       <Tippy
-        content={"New task"}
-        placement="top"
-        animation="scale-subtle"
-        theme="material"
+        content={'New task'}
+        placement='top'
+        animation='scale-subtle'
+        theme='material'
         arrow={true}
         duration={200}
         delay={[400, 0]}
@@ -64,6 +72,9 @@ export const ColumnHeader = ({ id, name, isEmpty }) => {
         <AddButton
           onClick={() => {
             dispatch(addCard(id));
+            setColumnCard(id);
+            setCardItem(columns[id].items[columns[id].items.length - 1]);
+            setCardStatus((n) => !n);
           }}
         >
           <FiPlusCircle size={32} />
@@ -79,10 +90,10 @@ export const ColumnHeader = ({ id, name, isEmpty }) => {
       {/* <div style={{ margin: 8 }}> */}
 
       <Tippy
-        content={"Close"}
-        placement="top"
-        animation="scale-subtle"
-        theme="material"
+        content={'Close'}
+        placement='top'
+        animation='scale-subtle'
+        theme='material'
         arrow={true}
         duration={200}
         delay={[400, 0]}
@@ -101,7 +112,7 @@ export const ColumnHeader = ({ id, name, isEmpty }) => {
         </ClosedButton>
       </Tippy>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="warning">
+        <Alert onClose={handleClose} severity='warning'>
           Unable to remove, there are task(s) in this column!
         </Alert>
       </Snackbar>
