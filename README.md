@@ -45,7 +45,7 @@ No need for peer review if you know for sure this wont brick anything. Once you 
 
 - ~~When the application starts, you have 3 empty columns: "Todo", "In progress", "Done"~~
 
-- Each column has a "+" button. The user can click this button to create a task card in any column
+- ~~Each column has a "+" button. The user can click this button to create a task card in any column~~
 
 - ~~Task cards clearly display the title of the contained task~~
 
@@ -57,19 +57,54 @@ No need for peer review if you know for sure this wont brick anything. Once you 
 
 - ~~The user can move tasks between columns using the "Move" button in the context menu~~
 
-- The user can edit column titles
+- ~~The user can edit column titles~~
 
 - ~~The user can create columns~~
 
 - ~~The user can change the order of columns using drag-and-drop~~
 
-- The user can delete columns (you will have to decide what happens to a column's cards in this case)
+- ~~The user can delete columns (you will have to decide what happens to a column's cards in this case)~~
 
 - Add additional UI to enhance UX like
 
-  - Tooltips
-  - Clear All
+  - ~~Tooltips~~
+  - ~~Clear All~~
   - Info bubble
 
 - Create a landing Page
+
   - Link to Dev's social media
+
+  # NEW FEATURES LEFT
+
+- Get Started button launches user form to enter Kanban Board name
+
+- Warning when you close a column using a snackbar - (Gia)
+
+- Mobile responsive - (Adonis)
+
+- Centering the board - (Adonis)
+
+- Dark Mode light mode (low priority)
+
+- Set tasks by priority (low priority)
+
+# BONUS FEATURES
+
+- The site is mobile-responsive (highly recommended but not required)
+
+- Each card has a context menu you can access through right-click (desktop).
+
+- Each card has a context menu you can access through long-press (mobile).
+
+- Nice animations
+
+- The user can access the context menu using right-click
+
+- The user can add images as attachments to the cards (yes, it is possible to save images to localstorage, https://stackoverflow.com/questions/19183180/how-to-save-an-image-to-localstorage-and-display-it-on-the-next-page)
+
+- Data is saved to LocalStorage or IndexedDB (to avoid collisions when using FeaturePeek, please use a unique name for the namespace you're saving your data to) - (Thinh)
+
+- Something cooler? More creative? It's your site! Make it however you want, we're looking forward to seeing your creativity!
+
+- Tutorial on the landing Page (IMPORTANT! - Thinh)
