@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import { addCard, removeColumn } from '../../actions';
-import { useDispatch } from 'react-redux';
-import { FiPlusCircle, FiXCircle } from 'react-icons/fi';
-import COLORS from '../COLORS';
+import { addCard, removeColumn } from "../../actions";
+import { useDispatch } from "react-redux";
+import { FiPlusCircle, FiXCircle } from "react-icons/fi";
+import COLORS from "../COLORS";
 
 export const ColumnHeader = ({ id, name, isEmpty }) => {
   const [formName, setFormName] = useState(name);
@@ -62,11 +62,15 @@ const HeaderInput = styled.input`
   line-height: 1.6;
   text-align: center;
   border: none;
+  color: ${COLORS.textPrimary};
   /* color: white; */
+  outline: none;
   background-color: inherit;
   &:focus {
     /* background-color: ${COLORS.outlineGrey}; */
-    outline: 1px solid ${COLORS.outlineSecondary};
+    color: ${COLORS.btnSecondary};
+    /* outline: 1px solid ${COLORS.outlineGrey}; */
+    border-bottom: 1px solid ${COLORS.outlineGrey};
   }
 `;
 

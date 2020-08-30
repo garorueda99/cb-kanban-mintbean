@@ -166,23 +166,25 @@ const ColumnContainer = styled.div`
   border: 1px solid gainsboro;
   border-radius: 20px;
   margin: 12px;
+  width: 350px;
   box-shadow: 0px 2px 2px 2px rgba(211, 211, 211, 0.75);
 `;
 
 const TasksContainer = styled.div`
   padding: 4px;
-  width: 250px;
+  min-width: 300px;
   min-height: 500px;
-  border: 5px solid green;
+  margin: 5px;
 `;
 
 const TaskItem = styled.div`
   position: relative;
   padding: 16px;
-  margin: 0 0 8px 0;
+  /* margin: 0 0 20px 0; */
+  margin: 20px;
   color: #000;
   border-radius: 10px;
-  border: 2px solid pink;
+  border: 2px solid ${COLORS.btnPrimary};
 `;
 
 const Loading = styled.div`
