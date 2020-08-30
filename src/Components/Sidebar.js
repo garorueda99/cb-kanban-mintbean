@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import uuid from "uuid/v4";
 import CreateColumn from "./CreateColumn";
-import { addColumn } from "../actions";
+import { addColumn, toggleWarningModal } from "../actions";
 import COLORS from "./COLORS";
 import { FiArrowLeft, FiEdit, FiTrash2 } from "react-icons/fi";
 
@@ -23,6 +23,8 @@ const Sidebar = () => {
     name,
     items: [],
   };
+
+  const state = useSelector((state) => state);
 
   return (
     <Wrapper>
@@ -71,7 +73,7 @@ const Sidebar = () => {
               delay={[400, 0]}
               distance={8}
             >
-              <Button onClick={() => console.log("Clear All Tasks")}>
+              <Button onClick={() => dispatch(toggleWarningModal())}>
                 <FiTrash2 size={36} />
               </Button>
             </Tippy>
