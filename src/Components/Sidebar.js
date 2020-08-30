@@ -14,7 +14,17 @@ import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/material.css";
 import "tippy.js/animations/scale-subtle.css";
 
+// ## SNACKBAR ##
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import { makeStyles } from "@material-ui/core/styles";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 const Sidebar = () => {
+  const [open, setOpen] = React.useState(false);
   const id = uuid();
   let name = "New column";
   const dispatch = useDispatch();
@@ -25,6 +35,20 @@ const Sidebar = () => {
   };
 
   const state = useSelector((state) => state);
+  // console.log("we have this many columns", Object.keys(state.columns).length);
+
+  const numCols = Object.keys(state.columns).length;
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
 
   return (
     <Wrapper>
@@ -41,7 +65,7 @@ const Sidebar = () => {
               delay={[400, 0]}
               distance={8}
             >
-              <StyledNavLink exact to="/">
+              <StyledNavLink to="/">
                 <FiArrowLeft size={36} />
               </StyledNavLink>
             </Tippy>
@@ -57,7 +81,16 @@ const Sidebar = () => {
               delay={[400, 0]}
               distance={8}
             >
-              <Button onClick={() => dispatch(addColumn(column, id))}>
+              <Button
+                onClick={() => {
+                  if (numCols < 6) {
+                    dispatch(addColumn(column, id));
+                  } else {
+                    // window.alert("Too many columns");
+                    handleClick();
+                  }
+                }}
+              >
                 <FiEdit size={36} />
               </Button>
             </Tippy>
@@ -80,6 +113,11 @@ const Sidebar = () => {
           </li>
         </SidebarList>
       </Container>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          Max Columns Reached!
+        </Alert>
+      </Snackbar>
     </Wrapper>
   );
 };
