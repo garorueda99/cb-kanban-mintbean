@@ -4,7 +4,12 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import Card from "../Card";
 import Sidebar from "../Sidebar";
 import { useSelector } from "react-redux";
-import { updateColumnPositionH, updateColumnPositionV } from "../../actions";
+import {
+  updateColumnPositionH,
+  updateColumnPositionV,
+  toggleBoardForm,
+  updateBoardName,
+} from "../../actions";
 import { useDispatch } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import COLORS from "../COLORS";
@@ -16,6 +21,13 @@ import { ColumnHeader } from "./ColumnHeader";
 const Board = () => {
   const dispatch = useDispatch();
   const columns = useSelector((state) => state.columns);
+  const boardName = useSelector((state) => {
+    console.log("current kanban name is:", state.kanbanName);
+    return state.kanbanName;
+  });
+
+  const state = useSelector((state) => state);
+  console.log(state);
 
   const onDragEnd = (result, columns) => {
     if (!result.destination) return;
@@ -51,6 +63,10 @@ const Board = () => {
     }
   };
 
+  React.useEffect(() => {
+    dispatch(toggleBoardForm());
+  }, []);
+
   if (!columns) {
     return (
       <Loading>
@@ -64,77 +80,85 @@ const Board = () => {
     <Wrapper>
       <Sidebar />
       <BoardContainer>
-        <DragDropContext onDragEnd={(result) => onDragEnd(result, columns)}>
-          {Object.entries(columns).map(([columnId, column], index) => {
-            const hasTasks = columns[columnId].items.length <= 0;
-            return (
-              <ColumnContainer key={columnId}>
-                <ColumnHeader
-                  id={columnId}
-                  name={column.name}
-                  isEmpty={hasTasks}
-                />
-                <Droppable droppableId={columnId} key={columnId}>
-                  {(provided, snapshot) => {
-                    return (
-                      <TasksContainer
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        // style={{
-                        //   background: snapshot.isDraggingOver
-                        //     ? "gainsboro"
-                        //     : "white",
-                        // }}
-                      >
-                        {column.items.map((item, index) => {
-                          return (
-                            <Draggable
-                              key={item.id}
-                              draggableId={item.id}
-                              index={index}
-                            >
-                              {(provided, snapshot) => {
-                                return (
-                                  <TaskItem
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                    style={{
-                                      boxShadow: snapshot.isDragging
-                                        ? "0px 0px 13px -1px rgba(168,168,168,0.6)"
-                                        : "0px 0px 13px -1px rgba(168,168,168,0.3)",
-                                      ...provided.draggableProps.style,
-                                    }}
-                                  >
-                                    {/* <Card item={item} columnId={columnId}> */}
-                                    <TaskWrapper>
-                                      <span
-                                        style={{
-                                          minWidth: "190px",
-                                        }}
-                                      >
-                                        {item.content}
-                                      </span>
-                                      <EditButton>
-                                        <BiEdit />
-                                      </EditButton>
-                                    </TaskWrapper>
-                                    {/* </Card> */}
-                                  </TaskItem>
-                                );
-                              }}
-                            </Draggable>
-                          );
-                        })}
-                        {provided.placeholder}
-                      </TasksContainer>
-                    );
-                  }}
-                </Droppable>
-              </ColumnContainer>
-            );
-          })}
-        </DragDropContext>
+        <BoardTitle
+          onChange={(ev) => dispatch(updateBoardName(ev.target.value))}
+          type="text"
+          value={boardName}
+          placeholder={"Enter Project Name Here"}
+        />
+        <ColumnsContainer>
+          <DragDropContext onDragEnd={(result) => onDragEnd(result, columns)}>
+            {Object.entries(columns).map(([columnId, column], index) => {
+              const hasTasks = columns[columnId].items.length <= 0;
+              return (
+                <ColumnContainer key={columnId}>
+                  <ColumnHeader
+                    id={columnId}
+                    name={column.name}
+                    isEmpty={hasTasks}
+                  />
+                  <Droppable droppableId={columnId} key={columnId}>
+                    {(provided, snapshot) => {
+                      return (
+                        <TasksContainer
+                          {...provided.droppableProps}
+                          ref={provided.innerRef}
+                          // style={{
+                          //   background: snapshot.isDraggingOver
+                          //     ? "gainsboro"
+                          //     : "white",
+                          // }}
+                        >
+                          {column.items.map((item, index) => {
+                            return (
+                              <Draggable
+                                key={item.id}
+                                draggableId={item.id}
+                                index={index}
+                              >
+                                {(provided, snapshot) => {
+                                  return (
+                                    <TaskItem
+                                      ref={provided.innerRef}
+                                      {...provided.draggableProps}
+                                      {...provided.dragHandleProps}
+                                      style={{
+                                        boxShadow: snapshot.isDragging
+                                          ? "0px 0px 13px -1px rgba(168,168,168,0.6)"
+                                          : "0px 0px 13px -1px rgba(168,168,168,0.3)",
+                                        ...provided.draggableProps.style,
+                                      }}
+                                    >
+                                      {/* <Card item={item} columnId={columnId}> */}
+                                      <TaskWrapper>
+                                        <span
+                                          style={{
+                                            minWidth: "190px",
+                                          }}
+                                        >
+                                          {item.content}
+                                        </span>
+                                        <EditButton>
+                                          <BiEdit />
+                                        </EditButton>
+                                      </TaskWrapper>
+                                      {/* </Card> */}
+                                    </TaskItem>
+                                  );
+                                }}
+                              </Draggable>
+                            );
+                          })}
+                          {provided.placeholder}
+                        </TasksContainer>
+                      );
+                    }}
+                  </Droppable>
+                </ColumnContainer>
+              );
+            })}
+          </DragDropContext>
+        </ColumnsContainer>
       </BoardContainer>
     </Wrapper>
   );
@@ -143,6 +167,7 @@ const Board = () => {
 const Wrapper = styled.div`
   position: relative;
   display: flex;
+  /* align-items: center; */
   /* overflow: visible; */
 
   -ms-overflow-style: none; /* Internet Explorer 10+ */
@@ -156,8 +181,37 @@ const Wrapper = styled.div`
 
 const BoardContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
   align-items: center;
+  /* border: 5px solid red; */
+`;
+
+const BoardTitle = styled.input`
+  text-align: center;
+  padding: 12px;
+  font-size: 32px;
+  outline: none;
+  border: none;
+  color: ${COLORS.textPrimary};
+  font-weight: 500;
+
+  &::placeholder {
+    opacity: 0.4;
+  }
+  &:active {
+    outline: initial;
+    border-bottom: 1px solid ${COLORS.outlineGrey};
+  }
+  &:focus {
+    outline: initial;
+    border-bottom: 1px solid ${COLORS.outlineGrey};
+  }
+`;
+
+const ColumnsContainer = styled.div`
+  display: flex;
+  /* justify-content: flex-start; */
+  align-items: flex-start;
   max-height: 100vh;
   /* border: 5px solid goldenrod; */
   overflow: auto;
@@ -178,6 +232,7 @@ const ColumnContainer = styled.div`
   border: 1px solid gainsboro;
   border-radius: 5px;
   margin: 12px;
+  padding: 20px;
   width: 350px;
   box-shadow: 0px 2px 2px 2px rgba(211, 211, 211, 0.75);
 `;
@@ -186,7 +241,16 @@ const TasksContainer = styled.div`
   padding: 4px;
   min-width: 300px;
   min-height: 500px;
+  max-height: 800px;
   margin: 5px;
+  overflow: auto;
+
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    width: 0;
+    display: none;
+  }
 `;
 
 const TaskItem = styled.div`
