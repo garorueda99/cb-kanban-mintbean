@@ -86,7 +86,6 @@ const Wrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-right: 2%;
 `;
 
 const Container = styled.div`
