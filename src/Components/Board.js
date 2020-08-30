@@ -12,8 +12,7 @@ import { addCard } from '../actions';
 
 const Board = () => {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
-  const { columns } = state;
+  const columns = useSelector((state) => state.columns);
 
   const onDragEnd = (result, columns) => {
     if (!result.destination) return;
@@ -74,7 +73,6 @@ const Board = () => {
                     onClick={() => {
                       // console.log('New Card Added', columnId);
                       dispatch(addCard(columnId));
-                      console.log('STATE==>', state);
                     }}
                   />
                   <CircleIconX
