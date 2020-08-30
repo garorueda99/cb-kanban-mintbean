@@ -28,6 +28,8 @@ const initialState = JSON.parse(
     },
   },
   openModal: false,
+  kanbanForm: false,
+  kanbanName: "New Project Name",
 };
 
 export default function columnReducer(state = initialState, action) {
@@ -116,6 +118,20 @@ export default function columnReducer(state = initialState, action) {
       return produce(state, (draftState) => {
         draftState.openModal = !draftState.openModal;
       });
+    }
+
+    case "TOGGLE_BOARD_FORM": {
+      return produce(state, (draftState) => {
+        draftState.kanbanForm = !draftState.kanbanForm;
+      });
+    }
+
+    case "UPDATE_BOARD_NAME": {
+      console.log("Incoming action is:", action);
+      const result = produce(state, (draftState) => {
+        draftState.kanbanName = action.name;
+      });
+      return result;
     }
 
     case "DELETE_ALL_TASKS": {
