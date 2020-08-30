@@ -1,8 +1,8 @@
-import React, { Children } from 'react';
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
-
-import { makeStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
+import Header from './Header';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const close = keyframes`
 0%{
@@ -16,34 +16,34 @@ const close = keyframes`
 }
 `;
 
-// let statePost;
-
 export default function Card({ children, state, setState }) {
-  // statePost = state;
   return (
     <CardWrapper
       style={{
         display: !state ? 'inline' : 'none',
       }}
     >
-      <Avatar
-        alt='user'
-        src="'../../../public/static/images/avatar/avatar1.png'"
-      />
-      {children}
-      <Button
-        onClick={() => {
-          setState((n) => !n);
-        }}
-      >
-        SAVE
-      </Button>
+      <Header title={children} />
+      <ContentWrapper>
+        <TextField
+          id='outlined-multiline-static'
+          label='Description'
+          multiline
+          rows={4}
+          defaultValue="Let's start"
+          variant='outlined'
+        />
+        <Button variant='contained'>SAVE</Button>
+      </ContentWrapper>
     </CardWrapper>
   );
 }
 
 const CardWrapper = styled.div`
   position: absolute;
+  display: flex;
+  flex-direction: 'column';
+  padding: 15px 10px;
   transform: translate(-50%, -50%) scale(1);
   width: 300px;
   height: 400px;
@@ -61,7 +61,9 @@ const CardWrapper = styled.div`
   animation-fill-mode: forwards;
 `;
 
-const Button = styled.button`
-  top: 90%;
-  right: 5%;
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border: 1px solid purple;
 `;
