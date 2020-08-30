@@ -9,28 +9,15 @@ import Dialog from '@material-ui/core/Dialog';
 
 const close = keyframes`
 0%{
- transform: translate(0%, 15%) scale(0.25);
+ transform: translate(-50%, -50%) scale(0.25);
 }
 55% {
- transform: translate(50%, 50%) scale(1.15);
-}
-100% {
- transform: translate(0%, 0%) scale(1);
+ transform: translate(-50%, -50%) scale(1.15);
 }
 `;
 
-export default function Card({
-  children,
-  columnId,
-  item,
-  cardStatus,
-  setCardStatus,
-}) {
-  // const items = useSelector((state) => state.columns[columnId].items);
-  // const objectFinder = (element) => element.id === item.id;
-  // const index = items.findIndex(objectFinder);
+export default function Card({ columnId, item, cardStatus, setCardStatus }) {
   const [info, setInfo] = useState(item.task);
-  console.log('===>', !item);
   const [title, setTitle] = useState(item.content);
   const dispatch = useDispatch();
 
@@ -89,8 +76,8 @@ const CardWrapper = styled.div`
   );
   box-shadow: 0 10px 15px 0 #888888;
   border-radius: 12px;
-  /* animation: ${close} 0.9s cubic-bezier(0.075, 0.82, 0.165, 1); */
-  animation-fill-mode: forwards;
+  animation: ${close} 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+  /* animation-fill-mode: forwards; */
 `;
 
 const ContentWrapper = styled.div`
