@@ -3,19 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
 import Dialog from "@material-ui/core/Dialog";
-// import { FiPlusCircle, FiXCircle } from "react-icons/fi";
-// import Tippy from "@tippyjs/react";
-// import "tippy.js/dist/tippy.css";
-// import "tippy.js/themes/material.css";
-// import "tippy.js/animations/scale-subtle.css";
 
 import COLORS from "./COLORS";
 import { toggleBoardForm, updateBoardName } from "../actions";
 import { Input } from "@material-ui/core";
 
-const FormModal = (props) => {
+const FormModal = () => {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
+  const boardName = useSelector((state) => state.kanbanName);
+
+  // Check if there is a name for the board, only trigers the modal when the
+  //field is emtpy
+  let hasName = false;
+  if (!boardName) {
+    hasName = true;
+  }
 
   const handleClose = () => {
     dispatch(toggleBoardForm());
@@ -29,25 +31,13 @@ const FormModal = (props) => {
   };
 
   return (
-    <Dialog
-      onClose={handleClose}
-      aria-labelledby="warning"
-      open={state.kanbanForm}
-    >
+    <Dialog onClose={handleClose} aria-labelledby="warning" open={hasName}>
       <ModalContentWrapper>
         <FormWrapper name="kanbanForm" onSubmit={handleSubmit}>
-          {/* <FormHeader> */}
           <Title>Please enter your new Kanban Board name!</Title>
-          {/* </FormHeader> */}
-          {/* <FormInput> */}
           <InputField name="kanbanName" type="text" />
-          {/* </FormInput> */}
           <AddButton type="submit">Submit</AddButton>
         </FormWrapper>
-
-        {/* <ButtonWrapper> */}
-        {/* <AddButton onClick={handleClick}>Submit</AddButton> */}
-        {/* </ButtonWrapper> */}
       </ModalContentWrapper>
     </Dialog>
   );
@@ -64,27 +54,10 @@ const FormWrapper = styled.form`
   align-items: center;
 `;
 
-const FormHeader = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 40px;
-`;
-
 const Title = styled.h1`
   font-size: 24px;
   font-weight: 500;
   margin: 10px 0;
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-`;
-
-const FormInput = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
 `;
 
 const InputField = styled(Input)`

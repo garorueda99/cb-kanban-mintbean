@@ -29,7 +29,7 @@ const initialState = JSON.parse(
   },
   openModal: false,
   kanbanForm: false,
-  kanbanName: "New Project Name",
+  kanbanName: undefined,
 };
 
 export default function columnReducer(state = initialState, action) {
