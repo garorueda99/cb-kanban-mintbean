@@ -17,13 +17,11 @@ const PurchaseModal = (props) => {
   const state = useSelector((state) => state);
 
   const handleClose = () => {
-    console.log("close");
     dispatch(toggleWarningModal());
   };
 
   const handleClick = (e) => {
     e.preventDefault();
-    console.log("click");
     dispatch(toggleWarningModal());
     dispatch(deleteAllTasks());
   };
