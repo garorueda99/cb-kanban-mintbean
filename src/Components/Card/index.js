@@ -36,7 +36,7 @@ export default function Card({ children, columnId, item }) {
           label='Description'
           multiline
           rows={4}
-          defaultValue="Let's start"
+          defaultValue={info}
           variant='outlined'
           onChange={(e) => {
             setInfo(e.target.value);
@@ -46,7 +46,6 @@ export default function Card({ children, columnId, item }) {
           variant='contained'
           onClick={() => {
             dispatch(saveCardInfo(columnId, item, info, title));
-            console.log(items[index]);
           }}
         >
           SAVE

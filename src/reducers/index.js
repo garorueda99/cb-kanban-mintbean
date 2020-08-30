@@ -59,6 +59,7 @@ export default function columnReducer(state = initialState, action) {
 
       const objectFinder = (element) => element.id === item.id;
       const index = state.columns[columnId].items.findIndex(objectFinder);
+
       return produce(state, (draftState) => {
         draftState.columns[columnId].items[index] = {
           ...item,
