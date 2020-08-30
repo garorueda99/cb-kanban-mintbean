@@ -212,7 +212,7 @@ const BoardContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 5px solid red;
+  /* border: 5px solid red; */
   height: 100vh;
   margin: 0 auto;
 `;
