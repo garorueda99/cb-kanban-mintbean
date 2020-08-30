@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // ### IMPORT COMPONENTS ###
 import GlobalStyles from "./components/GlobalStyles";
@@ -8,6 +9,12 @@ import LandingPage from "./components/LandingPage";
 import WarningModal from "./components/WarningModal";
 
 function App() {
+  const state = useSelector((state) => state);
+
+  React.useEffect(() => {
+    window.localStorage.setItem("persistedState", JSON.stringify(state));
+  }, [state]);
+
   return (
     <>
       <WarningModal />
