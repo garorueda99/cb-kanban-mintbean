@@ -13,7 +13,7 @@ export const ContentHero = () => {
       <CardContainer>
         <Column>
           <Title>
-            Simple. Easy. Organized. <h1>Kanban.</h1>
+            Simple. Easy. Organized. <strong>Kanban.</strong>
           </Title>
           <Text>
             Introducing the latest Kaban application to the world for your every
@@ -44,7 +44,7 @@ const Title = styled.h1`
   font-weight: 400;
   font-size: 56px;
   font-family: "Roboto", sans-serif;
-  & h1 {
+  & strong {
     font-weight: 400;
     color: ${COLORS.btnPrimary};
   }
