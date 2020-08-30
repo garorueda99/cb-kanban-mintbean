@@ -18,14 +18,12 @@ const FormModal = (props) => {
   const state = useSelector((state) => state);
 
   const handleClose = () => {
-    console.log("close");
     dispatch(toggleBoardForm());
   };
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
     const name = document.kanbanForm.kanbanName.value;
-    console.log("user entered", name);
     dispatch(toggleBoardForm());
     dispatch(updateBoardName(name));
   };

@@ -127,7 +127,6 @@ export default function columnReducer(state = initialState, action) {
     }
 
     case "UPDATE_BOARD_NAME": {
-      console.log("Incoming action is:", action);
       const result = produce(state, (draftState) => {
         draftState.kanbanName = action.name;
       });
@@ -137,7 +136,6 @@ export default function columnReducer(state = initialState, action) {
     case "DELETE_ALL_TASKS": {
       return produce(state, (draftState) => {
         const arr = Object.keys(draftState.columns);
-        console.log("array", arr);
         arr.forEach((id) => {
           draftState.columns[id].items = [];
         });

@@ -25,12 +25,10 @@ const Board = () => {
   const [cardItem, setCardItem] = useState(false);
   const [columnCard, setColumnCard] = useState(null);
   const boardName = useSelector((state) => {
-    console.log('current kanban name is:', state.kanbanName);
     return state.kanbanName;
   });
 
   const state = useSelector((state) => state);
-  console.log(state);
 
   const onDragEnd = (result, columns) => {
     if (!result.destination) return;
@@ -67,7 +65,6 @@ const Board = () => {
   };
 
   React.useEffect(() => {
-    console.log(window.location);
     if (window.location.pathname === '/board') {
       dispatch(toggleBoardForm());
     }
@@ -90,7 +87,7 @@ const Board = () => {
           onChange={(ev) => dispatch(updateBoardName(ev.target.value))}
           type='text'
           value={boardName}
-          placeholder={'Enter Project Name Here'}
+          placeholder={'Enter Project Name'}
         />
         <ColumnsContainer>
           <DragDropContext onDragEnd={(result) => onDragEnd(result, columns)}>
@@ -213,6 +210,7 @@ const BoardTitle = styled.input`
   border: none;
   color: ${COLORS.textPrimary};
   font-weight: 500;
+  min-width: 200px;
 
   &::placeholder {
     opacity: 0.4;
