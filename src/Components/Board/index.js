@@ -1,17 +1,27 @@
-import React from 'react';
-import styled from 'styled-components';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-import Card from '../../components/Card';
-import Sidebar from '../Sidebar';
-import { useSelector } from 'react-redux';
-import { updateColumnPositionH, updateColumnPositionV } from '../../actions';
-import { useDispatch } from 'react-redux';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import COLORS from '../COLORS';
-import { BiEdit } from 'react-icons/bi';
+import React from "react";
+import styled from "styled-components";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import Card from "../Card";
+import Sidebar from "../Sidebar";
+import { useSelector } from "react-redux";
+import { updateColumnPositionH, updateColumnPositionV } from "../../actions";
+import { useDispatch } from "react-redux";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import COLORS from "../COLORS";
+import React from "react";
+import styled from "styled-components";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import Card from "../../components/Card";
+import Sidebar from "../Sidebar";
+import { useSelector } from "react-redux";
+import { updateColumnPositionH, updateColumnPositionV } from "../../actions";
+import { useDispatch } from "react-redux";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import COLORS from "../COLORS";
+import { BiEdit } from "react-icons/bi";
 
 //## COMPONENTS ##
-import { ColumnHeader } from './ColumnHeader';
+import { ColumnHeader } from "./ColumnHeader";
 
 const Board = () => {
   const dispatch = useDispatch();
@@ -82,8 +92,8 @@ const Board = () => {
                         ref={provided.innerRef}
                         style={{
                           border: snapshot.isDraggingOver
-                            ? '1px solid gainsboro'
-                            : '1px solid white',
+                            ? "1px solid gainsboro"
+                            : "1px solid white",
                         }}
                       >
                         {column.items.map((item, index) => {
@@ -101,8 +111,8 @@ const Board = () => {
                                     {...provided.dragHandleProps}
                                     style={{
                                       boxShadow: snapshot.isDragging
-                                        ? '0px 0px 13px -1px rgba(168,168,168,0.6)'
-                                        : '0px 0px 13px -1px rgba(168,168,168,0.3)',
+                                        ? "0px 0px 13px -1px rgba(168,168,168,0.6)"
+                                        : "0px 0px 13px -1px rgba(168,168,168,0.3)",
                                       ...provided.draggableProps.style,
                                     }}
                                   >
@@ -110,7 +120,7 @@ const Board = () => {
                                     <TaskWrapper>
                                       <span
                                         style={{
-                                          minWidth: '190px',
+                                          minWidth: "190px",
                                         }}
                                       >
                                         {item.content}
@@ -175,24 +185,28 @@ const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 4px solid ${COLORS.btnPrimary};
+  border: 1px solid gainsboro;
   border-radius: 20px;
-  margin: 2%;
+  margin: 12px;
+  width: 350px;
+  box-shadow: 0px 2px 2px 2px rgba(211, 211, 211, 0.75);
 `;
 
 const TasksContainer = styled.div`
   padding: 4px;
-  width: 250px;
+  min-width: 300px;
   min-height: 500px;
-  border: 5px solid green;
+  margin: 5px;
 `;
 
 const TaskItem = styled.div`
   position: relative;
   padding: 16px;
-  margin: 0 0 8px 0;
+  /* margin: 0 0 20px 0; */
+  margin: 20px;
   color: #000;
   border-radius: 10px;
+  border: 2px solid ${COLORS.btnPrimary};
   border: 2px solid ${COLORS.outlinePrimary};
 `;
 
