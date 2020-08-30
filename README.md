@@ -59,9 +59,9 @@ No need for peer review if you know for sure this wont brick anything. Once you 
 
 - The user can edit column titles
 
-- The user can create columns
+- ~~The user can create columns~~
 
-- The user can change the order of columns using drag-and-drop
+- ~~The user can change the order of columns using drag-and-drop~~
 
 - The user can delete columns (you will have to decide what happens to a column's cards in this case)
 
