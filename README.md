@@ -81,7 +81,17 @@ No need for peer review if you know for sure this wont brick anything. Once you 
 
 - ~~Mobile responsive~~ - (Adonis)
 
-- Centering the board - (Thinh)
+- Centering the board + Title responsiveness - (Thinh)
+
+- Snackbar messages (max 6 columns) - (Thinh)
+
+- Animation for drag-drop tasks - (Adonis)
+
+- Styling Card + Modal - (Adonis)
+
+- Card Modal needs to be able to close and open on new task - (Andres)
+
+- Card modal can be closed via "Esc" or clicking outside - (Andres)
 
 - Dark Mode light mode (low priority)
 
