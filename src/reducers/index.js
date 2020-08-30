@@ -36,6 +36,13 @@ export default function columnReducer(state = initialState, action) {
         draftState.columns[id] = column;
       });
     }
+    case "REMOVE_COLUMN": {
+      const { id } = action;
+
+      return produce(state, (draftState) => {
+        delete draftState[id];
+      });
+    }
     case "UPDATE_COLUMN_POSITION_HORIZONTALLY": {
       const {
         columns,
