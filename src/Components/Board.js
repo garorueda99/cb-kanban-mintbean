@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { updateColumnPositionH, updateColumnPositionV } from '../actions';
 import { useDispatch } from 'react-redux';
 import { FiPlusCircle } from 'react-icons/fi';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 const Board = () => {
   const dispatch = useDispatch();
@@ -69,6 +70,11 @@ const Board = () => {
 
                 <div style={{ margin: 8 }}>
                   <CircleIcon
+                    onClick={() => {
+                      console.log('New Card Added');
+                    }}
+                  />
+                  <CircleIconX
                     onClick={() => {
                       console.log('New Card Added');
                     }}
@@ -145,6 +151,15 @@ const StyledDiv = styled.div`
 `;
 
 const CircleIcon = styled(FiPlusCircle)`
+  margin: 5px;
+  &:hover {
+    cursor: pointer;
+    color: #0acc33;
+  }
+`;
+
+const CircleIconX = styled(AiOutlineCloseCircle)`
+  background-color: red;
   margin: 5px;
   &:hover {
     cursor: pointer;
