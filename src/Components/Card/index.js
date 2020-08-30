@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Header from './Header';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveCardInfo } from '../../actions';
+
+const info = 'info';
 
 const close = keyframes`
 0%{
@@ -16,13 +20,11 @@ const close = keyframes`
 }
 `;
 
-export default function Card({ children, state, setState }) {
+export default function Card({ children, columnId, item }) {
+  const [info, setInfo] = useState('');
+  const dispatch = useDispatch();
   return (
-    <CardWrapper
-      style={{
-        display: !state ? 'inline' : 'none',
-      }}
-    >
+    <CardWrapper>
       <Header title={children} />
       <ContentWrapper>
         <TextField
@@ -32,8 +34,18 @@ export default function Card({ children, state, setState }) {
           rows={4}
           defaultValue="Let's start"
           variant='outlined'
+          onChange={(e) => {
+            setInfo(e.target.value);
+          }}
         />
-        <Button variant='contained'>SAVE</Button>
+        <Button
+          variant='contained'
+          onClick={() => {
+            dispatch(saveCardInfo(columnId, item, info));
+          }}
+        >
+          SAVE
+        </Button>
       </ContentWrapper>
     </CardWrapper>
   );
@@ -42,7 +54,7 @@ export default function Card({ children, state, setState }) {
 const CardWrapper = styled.div`
   position: absolute;
   display: flex;
-  flex-direction: 'column';
+  flex-direction: column;
   padding: 15px 10px;
   transform: translate(-50%, -50%) scale(1);
   width: 300px;
@@ -64,6 +76,6 @@ const CardWrapper = styled.div`
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   flex: 1;
-  border: 1px solid purple;
 `;
