@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import Card from "../Card";
@@ -21,6 +21,8 @@ import { ColumnHeader } from "./ColumnHeader";
 const Board = () => {
   const dispatch = useDispatch();
   const columns = useSelector((state) => state.columns);
+  const [cardStatus, setCartStatus] = useState(false);
+  const [cardItem, setCardItem] = useState(false);
   const boardName = useSelector((state) => {
     return state.kanbanName;
   });
@@ -138,7 +140,12 @@ const Board = () => {
                                         >
                                           {item.content}
                                         </span>
-                                        <EditButton>
+                                        <EditButton
+                                          onClick={() => {
+                                            setCartStatus((n) => !n);
+                                            setCardItem(item);
+                                          }}
+                                        >
                                           <BiEdit />
                                         </EditButton>
                                       </TaskWrapper>
@@ -160,6 +167,7 @@ const Board = () => {
           </DragDropContext>
         </ColumnsContainer>
       </BoardContainer>
+      {cardStatus && <Card item={cardItem} />}
     </Wrapper>
   );
 };
