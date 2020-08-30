@@ -81,9 +81,9 @@ No need for peer review if you know for sure this wont brick anything. Once you 
 
 - ~~Mobile responsive~~ - (Adonis)
 
-- Centering the board + Title responsiveness - (Thinh)
+- ~~Centering the board + Title responsiveness~~ - (Thinh)
 
-- Snackbar messages (max 6 columns) - (Thinh)
+- ~~Snackbar messages (max 6 columns)~~ - (Thinh)
 
 - Animation for drag-drop tasks - (Adonis)
 
