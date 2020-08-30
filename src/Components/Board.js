@@ -83,7 +83,11 @@ const Board = () => {
                   />
                   <CircleIconX
                     onClick={() => {
-                      dispatch(removeColumn(columnId));
+                      console.log("length", columns[columnId].items.length);
+                      if (columns[columnId].items.length <= 0) {
+                        console.log("column id", columnId);
+                        dispatch(removeColumn(columnId));
+                      }
                     }}
                   />
                   <Droppable droppableId={columnId} key={columnId}>

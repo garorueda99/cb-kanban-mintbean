@@ -40,7 +40,7 @@ export default function columnReducer(state = initialState, action) {
       const { id } = action;
 
       return produce(state, (draftState) => {
-        delete draftState[id];
+        delete draftState.columns[id];
       });
     }
 
