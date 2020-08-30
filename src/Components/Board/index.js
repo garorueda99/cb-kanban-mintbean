@@ -1,21 +1,23 @@
-import React from "react";
-import styled from "styled-components";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import Card from "../Card";
-import Sidebar from "../Sidebar";
-import { useSelector } from "react-redux";
-import { updateColumnPositionH, updateColumnPositionV } from "../../actions";
-import { useDispatch } from "react-redux";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import COLORS from "../COLORS";
-import { BiEdit } from "react-icons/bi";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import Card from '../Card';
+import Sidebar from '../Sidebar';
+import { useSelector } from 'react-redux';
+import { updateColumnPositionH, updateColumnPositionV } from '../../actions';
+import { useDispatch } from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import COLORS from '../COLORS';
+import { BiEdit } from 'react-icons/bi';
 
 //## COMPONENTS ##
-import { ColumnHeader } from "./ColumnHeader";
+import { ColumnHeader } from './ColumnHeader';
 
 const Board = () => {
   const dispatch = useDispatch();
   const columns = useSelector((state) => state.columns);
+  const [cardStatus, setCardStatus] = useState(false);
+  const [cardItem, setCardItem] = useState(null);
 
   const onDragEnd = (result, columns) => {
     if (!result.destination) return;
@@ -61,82 +63,93 @@ const Board = () => {
   }
 
   return (
-    <Wrapper>
-      <Sidebar />
-      <BoardContainer>
-        <DragDropContext onDragEnd={(result) => onDragEnd(result, columns)}>
-          {Object.entries(columns).map(([columnId, column], index) => {
-            const hasTasks = columns[columnId].items.length <= 0;
-            return (
-              <ColumnContainer key={columnId}>
-                <ColumnHeader
-                  id={columnId}
-                  name={column.name}
-                  isEmpty={hasTasks}
-                />
-                <Droppable droppableId={columnId} key={columnId}>
-                  {(provided, snapshot) => {
-                    return (
-                      <TasksContainer
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        // style={{
-                        //   background: snapshot.isDraggingOver
-                        //     ? "gainsboro"
-                        //     : "white",
-                        // }}
-                      >
-                        {column.items.map((item, index) => {
-                          return (
-                            <Draggable
-                              key={item.id}
-                              draggableId={item.id}
-                              index={index}
-                            >
-                              {(provided, snapshot) => {
-                                return (
-                                  <TaskItem
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                    style={{
-                                      boxShadow: snapshot.isDragging
-                                        ? "0px 0px 13px -1px rgba(168,168,168,0.6)"
-                                        : "0px 0px 13px -1px rgba(168,168,168,0.3)",
-                                      ...provided.draggableProps.style,
-                                    }}
-                                  >
-                                    {/* <Card item={item} columnId={columnId}> */}
-                                    <TaskWrapper>
-                                      <span
-                                        style={{
-                                          minWidth: "190px",
-                                        }}
-                                      >
-                                        {item.content}
-                                      </span>
-                                      <EditButton>
-                                        <BiEdit />
-                                      </EditButton>
-                                    </TaskWrapper>
-                                    {/* </Card> */}
-                                  </TaskItem>
-                                );
-                              }}
-                            </Draggable>
-                          );
-                        })}
-                        {provided.placeholder}
-                      </TasksContainer>
-                    );
-                  }}
-                </Droppable>
-              </ColumnContainer>
-            );
-          })}
-        </DragDropContext>
-      </BoardContainer>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Sidebar />
+        <BoardContainer>
+          <DragDropContext onDragEnd={(result) => onDragEnd(result, columns)}>
+            {Object.entries(columns).map(([columnId, column], index) => {
+              const hasTasks = columns[columnId].items.length <= 0;
+              return (
+                <ColumnContainer key={columnId}>
+                  <ColumnHeader
+                    id={columnId}
+                    name={column.name}
+                    isEmpty={hasTasks}
+                  />
+                  <Droppable droppableId={columnId} key={columnId}>
+                    {(provided, snapshot) => {
+                      return (
+                        <TasksContainer
+                          {...provided.droppableProps}
+                          ref={provided.innerRef}
+                          // style={{
+                          //   background: snapshot.isDraggingOver
+                          //     ? "gainsboro"
+                          //     : "white",
+                          // }}
+                        >
+                          {column.items.map((item, index) => {
+                            return (
+                              <Draggable
+                                key={item.id}
+                                draggableId={item.id}
+                                index={index}
+                              >
+                                {(provided, snapshot) => {
+                                  return (
+                                    <TaskItem
+                                      ref={provided.innerRef}
+                                      {...provided.draggableProps}
+                                      {...provided.dragHandleProps}
+                                      style={{
+                                        boxShadow: snapshot.isDragging
+                                          ? '0px 0px 13px -1px rgba(168,168,168,0.6)'
+                                          : '0px 0px 13px -1px rgba(168,168,168,0.3)',
+                                        ...provided.draggableProps.style,
+                                      }}
+                                    >
+                                      {/* <Card item={item} columnId={columnId}> */}
+                                      <TaskWrapper>
+                                        <span
+                                          style={{
+                                            minWidth: '190px',
+                                          }}
+                                        >
+                                          {item.content}
+                                        </span>
+                                        <EditButton
+                                          onClick={() => {
+                                            setCardStatus((n) => !n);
+                                            setCardItem(item);
+                                          }}
+                                        >
+                                          <BiEdit />
+                                        </EditButton>
+                                      </TaskWrapper>
+                                    </TaskItem>
+                                  );
+                                }}
+                              </Draggable>
+                            );
+                          })}
+                          {provided.placeholder}
+                        </TasksContainer>
+                      );
+                    }}
+                  </Droppable>
+                </ColumnContainer>
+              );
+            })}
+          </DragDropContext>
+        </BoardContainer>
+      </Wrapper>
+      <Card
+        cardStatus={cardStatus}
+        setCardStatus={setCardStatus}
+        item={cardItem}
+      />
+    </>
   );
 };
 
