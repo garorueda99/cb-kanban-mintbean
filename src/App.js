@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // ### IMPORT COMPONENTS ###
 import GlobalStyles from "./components/GlobalStyles";
@@ -9,6 +10,12 @@ import WarningModal from "./components/WarningModal";
 import FormModal from "./components/FormModal";
 
 function App() {
+  const state = useSelector((state) => state);
+
+  React.useEffect(() => {
+    window.localStorage.setItem("persistedState", JSON.stringify(state));
+  }, [state]);
+
   return (
     <>
       <WarningModal />

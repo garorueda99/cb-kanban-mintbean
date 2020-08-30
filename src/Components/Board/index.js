@@ -213,7 +213,6 @@ const ColumnsContainer = styled.div`
   /* justify-content: flex-start; */
   align-items: flex-start;
   max-height: 100vh;
-  /* border: 5px solid goldenrod; */
   overflow: auto;
   padding: 0 20px;
 
@@ -222,6 +221,18 @@ const ColumnsContainer = styled.div`
   &::-webkit-scrollbar {
     width: 0;
     display: none;
+  }
+
+  @media (max-width: 1200px) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  @media (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
   }
 `;
 

@@ -10,7 +10,9 @@ const testItems = [
   // { id: uuid(), content: 'TEST' },
 ];
 
-const initialState = {
+const initialState = JSON.parse(
+  window.localStorage.getItem("persistedState")
+) || {
   columns: {
     [uuid()]: {
       name: "To do",
