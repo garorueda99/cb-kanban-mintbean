@@ -22,28 +22,29 @@ const Wrapper = styled.div`
   align-items: center;
   display: flex;
   height: 80px;
-  /* border: 5px solid red; */
 `;
 
 const Left = styled.div`
   margin-left: 5%;
   flex: 4;
-  /* border: 1px dashed red; */
 `;
 
 const Right = styled.div`
   display: flex;
   justify-content: flex-end;
-  /* border: 1px dashed red; */
   margin-right: 5%;
   flex: 6;
 `;
 
 const PageTitle = styled.h1`
   user-select: none;
-  font-size: 44px;
+  font-size: 40px;
   font-weight: 500;
   color: ${COLORS.btnPrimary};
+
+  @media (max-width: 700px) {
+    font-size: 20px;
+  }
 `;
 
 export default Header;

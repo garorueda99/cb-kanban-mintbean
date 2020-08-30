@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 import test from "../../assets/test.gif";
 
@@ -25,7 +25,6 @@ export const ContentHero = () => {
 };
 
 const Wrapper = styled.div`
-  /* border: 5px solid red; */
   background: white;
   min-height: 80vh;
 `;
@@ -48,6 +47,11 @@ const Form = styled.form`
   /* justify-content: center;
   align-items: center; */
   margin: 20px 0;
+
+  @media (max-width: 860px) {
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 const CardContainer = styled.div`
@@ -55,19 +59,22 @@ const CardContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 5%;
-  /* margin: 5% 0; */
   min-height: 80vh;
 
-  /* Optional Card or Not */
-  /* box-shadow: 0px 2px 2px 2px rgba(211, 211, 211, 0.75);
-      border: 1px solid lightgray;
-      border-radius: 12px; */
+  @media (max-width: 860px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const Column = styled.div`
   position: relative;
   /* border: 5px dashed goldenrod; */
   flex: 1;
+
+  @media (max-width: 860px) {
+    text-align: center;
+  }
 `;
 
 const Button = styled.button`
@@ -95,5 +102,9 @@ const Button = styled.button`
     border: 3px solid ${COLORS.btnPrimary};
     background-color: ${COLORS.btnPrimary};
     color: white;
+  }
+
+  @media (max-width: 860px) {
+    text-align: center;
   }
 `;

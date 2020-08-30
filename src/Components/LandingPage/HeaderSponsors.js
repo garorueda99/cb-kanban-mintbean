@@ -70,9 +70,13 @@ const LogoList = styled.ul`
 `;
 
 const Logo = styled.img`
-  width: 45px;
+  width: 30px;
   height: 50%;
   opacity: 0.75;
+
+  @media (max-width: 700px) {
+    width: 20px;
+  }
 `;
 
 const Link = styled.a`
