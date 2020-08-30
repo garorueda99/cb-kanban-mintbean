@@ -66,7 +66,10 @@ const Board = () => {
   };
 
   React.useEffect(() => {
-    dispatch(toggleBoardForm());
+    console.log(window.location);
+    if (window.location.pathname === "/board") {
+      dispatch(toggleBoardForm());
+    }
   }, []);
 
   if (!columns) {
