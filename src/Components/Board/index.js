@@ -8,16 +8,6 @@ import { updateColumnPositionH, updateColumnPositionV } from "../../actions";
 import { useDispatch } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import COLORS from "../COLORS";
-import React from "react";
-import styled from "styled-components";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import Card from "../../components/Card";
-import Sidebar from "../Sidebar";
-import { useSelector } from "react-redux";
-import { updateColumnPositionH, updateColumnPositionV } from "../../actions";
-import { useDispatch } from "react-redux";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import COLORS from "../COLORS";
 import { BiEdit } from "react-icons/bi";
 
 //## COMPONENTS ##
