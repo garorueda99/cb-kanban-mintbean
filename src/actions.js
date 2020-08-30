@@ -9,11 +9,12 @@ export const addCard = (columnId) => ({
   columnId,
 });
 
-export const saveCardInfo = (columnId, item, info) => ({
+export const saveCardInfo = (columnId, item, info, title) => ({
   type: 'SAVE_CARD_INFO',
   columnId,
   item,
   info,
+  title,
 });
 
 export const removeColumn = (id) => ({
