@@ -155,7 +155,6 @@ const Wrapper = styled.div`
 `;
 
 const BoardContainer = styled.div`
-  border: 5px solid red;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -170,14 +169,16 @@ const BoardContainer = styled.div`
     display: none;
   }
 
-  /* @media (max-width: 1200px) {
+  @media (max-width: 1200px) {
     display: flex;
-    flex-direction: column;
-  } */
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
   @media (max-width: 600px) {
     display: flex;
     flex-direction: column;
+    flex-wrap: nowrap;
   }
 `;
 

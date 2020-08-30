@@ -35,6 +35,10 @@ const Title = styled.h1`
   font-weight: 400;
   font-size: 56px;
   font-family: "Roboto", sans-serif;
+
+  @media (max-width: 860px) {
+    text-align: center;
+  }
 `;
 
 const Animation = styled.img`
