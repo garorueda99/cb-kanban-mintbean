@@ -6,8 +6,6 @@ import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveCardInfo } from '../../actions';
 
-const info = 'info';
-
 const close = keyframes`
 0%{
  transform: translate(50%, -50%) scale(0.25);
@@ -21,18 +19,24 @@ const close = keyframes`
 `;
 
 export default function Card({ children, columnId, item }) {
-  const [info, setInfo] = useState('');
+  const items = useSelector((state) => state.columns[columnId].items);
+  const objectFinder = (element) => element.id === item.id;
+  const index = items.findIndex(objectFinder);
+  console.log('===>', items[index]);
+  const [info, setInfo] = useState(items[index].task);
+  const [title, setTitle] = useState(children);
   const dispatch = useDispatch();
+
   return (
     <CardWrapper>
-      <Header title={children} />
+      <Header title={children} setTitle={setTitle} />
       <ContentWrapper>
         <TextField
           id='outlined-multiline-static'
           label='Description'
           multiline
           rows={4}
-          defaultValue="Let's start"
+          defaultValue={info}
           variant='outlined'
           onChange={(e) => {
             setInfo(e.target.value);
@@ -41,7 +45,7 @@ export default function Card({ children, columnId, item }) {
         <Button
           variant='contained'
           onClick={() => {
-            dispatch(saveCardInfo(columnId, item, info));
+            dispatch(saveCardInfo(columnId, item, info, title));
           }}
         >
           SAVE

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header({ title = 'Set a Title' }) {
+export default function Header({ title = 'Set a Title', setTitle }) {
   const classes = useStyles();
 
   return (
@@ -33,7 +33,12 @@ export default function Header({ title = 'Set a Title' }) {
           className={classes.orange}
         />
         <div style={{ marginLeft: '8px' }}>
-          <TextField id='standard-basic' label='Title' defaultValue={title} />
+          <TextField
+            id='standard-basic'
+            label='Title'
+            defaultValue={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
           <TimeStamp>{date}</TimeStamp>
         </div>
       </Wrapper>

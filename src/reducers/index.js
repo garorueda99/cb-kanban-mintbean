@@ -2,8 +2,8 @@ import uuid from 'uuid/v4';
 import produce from 'immer';
 
 const testItems = [
-  { id: uuid(), content: 'First task' },
-  { id: uuid(), content: 'Second task' },
+  { id: uuid(), content: 'First task', task: '' },
+  { id: uuid(), content: 'Second task', task: '' },
   // { id: uuid(), content: 'Third task' },
   // { id: uuid(), content: 'Fourth task' },
   // { id: uuid(), content: 'Fifth task' },
@@ -55,14 +55,15 @@ export default function columnReducer(state = initialState, action) {
     }
 
     case 'SAVE_CARD_INFO': {
-      const { columnId, item, info } = action;
+      const { columnId, item, info, title } = action;
 
       const objectFinder = (element) => element.id === item.id;
       const index = state.columns[columnId].items.findIndex(objectFinder);
-      console.log(state, columnId, index);
+
       return produce(state, (draftState) => {
         draftState.columns[columnId].items[index] = {
           ...item,
+          content: title,
           task: info,
         };
       });
