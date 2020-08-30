@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import Card from '../Card';
 import Sidebar from '../Sidebar';
 import { useSelector } from 'react-redux';
-import { updateColumnPositionH, updateColumnPositionV } from '../../actions';
+import {
+  updateColumnPositionH,
+  updateColumnPositionV,
+  toggleBoardForm,
+  updateBoardName,
+} from '../../actions';
 import { useDispatch } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import COLORS from '../COLORS';
@@ -16,8 +21,13 @@ import { ColumnHeader } from './ColumnHeader';
 const Board = () => {
   const dispatch = useDispatch();
   const columns = useSelector((state) => state.columns);
-  const [cardStatus, setCardStatus] = useState(false);
-  const [cardItem, setCardItem] = useState(null);
+  const boardName = useSelector((state) => {
+    console.log('current kanban name is:', state.kanbanName);
+    return state.kanbanName;
+  });
+
+  const state = useSelector((state) => state);
+  console.log(state);
 
   const onDragEnd = (result, columns) => {
     if (!result.destination) return;
@@ -53,6 +63,10 @@ const Board = () => {
     }
   };
 
+  React.useEffect(() => {
+    dispatch(toggleBoardForm());
+  }, []);
+
   if (!columns) {
     return (
       <Loading>
@@ -63,10 +77,16 @@ const Board = () => {
   }
 
   return (
-    <>
-      <Wrapper>
-        <Sidebar />
-        <BoardContainer>
+    <Wrapper>
+      <Sidebar />
+      <BoardContainer>
+        <BoardTitle
+          onChange={(ev) => dispatch(updateBoardName(ev.target.value))}
+          type='text'
+          value={boardName}
+          placeholder={'Enter Project Name Here'}
+        />
+        <ColumnsContainer>
           <DragDropContext onDragEnd={(result) => onDragEnd(result, columns)}>
             {Object.entries(columns).map(([columnId, column], index) => {
               const hasTasks = columns[columnId].items.length <= 0;
@@ -118,15 +138,11 @@ const Board = () => {
                                         >
                                           {item.content}
                                         </span>
-                                        <EditButton
-                                          onClick={() => {
-                                            setCardStatus((n) => !n);
-                                            setCardItem(item);
-                                          }}
-                                        >
+                                        <EditButton>
                                           <BiEdit />
                                         </EditButton>
                                       </TaskWrapper>
+                                      {/* </Card> */}
                                     </TaskItem>
                                   );
                                 }}
@@ -142,20 +158,16 @@ const Board = () => {
               );
             })}
           </DragDropContext>
-        </BoardContainer>
-      </Wrapper>
-      <Card
-        cardStatus={cardStatus}
-        setCardStatus={setCardStatus}
-        item={cardItem}
-      />
-    </>
+        </ColumnsContainer>
+      </BoardContainer>
+    </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   position: relative;
   display: flex;
+  /* align-items: center; */
   /* overflow: visible; */
 
   -ms-overflow-style: none; /* Internet Explorer 10+ */
@@ -169,8 +181,37 @@ const Wrapper = styled.div`
 
 const BoardContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
   align-items: center;
+  /* border: 5px solid red; */
+`;
+
+const BoardTitle = styled.input`
+  text-align: center;
+  padding: 12px;
+  font-size: 32px;
+  outline: none;
+  border: none;
+  color: ${COLORS.textPrimary};
+  font-weight: 500;
+
+  &::placeholder {
+    opacity: 0.4;
+  }
+  &:active {
+    outline: initial;
+    border-bottom: 1px solid ${COLORS.outlineGrey};
+  }
+  &:focus {
+    outline: initial;
+    border-bottom: 1px solid ${COLORS.outlineGrey};
+  }
+`;
+
+const ColumnsContainer = styled.div`
+  display: flex;
+  /* justify-content: flex-start; */
+  align-items: flex-start;
   max-height: 100vh;
   overflow: auto;
   padding: 0 20px;
@@ -202,6 +243,7 @@ const ColumnContainer = styled.div`
   border: 1px solid gainsboro;
   border-radius: 5px;
   margin: 12px;
+  padding: 20px;
   width: 350px;
   box-shadow: 0px 2px 2px 2px rgba(211, 211, 211, 0.75);
 `;
@@ -210,7 +252,16 @@ const TasksContainer = styled.div`
   padding: 4px;
   min-width: 300px;
   min-height: 500px;
+  max-height: 800px;
   margin: 5px;
+  overflow: auto;
+
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    width: 0;
+    display: none;
+  }
 `;
 
 const TaskItem = styled.div`
