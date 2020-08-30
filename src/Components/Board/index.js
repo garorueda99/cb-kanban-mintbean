@@ -9,11 +9,13 @@ import {
   updateColumnPositionV,
   toggleBoardForm,
   updateBoardName,
+  deleteCard,
 } from '../../actions';
 import { useDispatch } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import COLORS from '../COLORS';
 import { BiEdit } from 'react-icons/bi';
+import { AiOutlineDelete } from 'react-icons/ai';
 
 //## COMPONENTS ##
 import { ColumnHeader } from './ColumnHeader';
@@ -141,7 +143,16 @@ const Board = () => {
                                         >
                                           {item.content}
                                         </span>
-                                        <EditButton
+                                        <MiniButton
+                                          onClick={() => {
+                                            dispatch(
+                                              deleteCard(columnId, item.id)
+                                            );
+                                          }}
+                                        >
+                                          <AiOutlineDelete />
+                                        </MiniButton>
+                                        <MiniButton
                                           onClick={() => {
                                             setCartStatus((n) => !n);
                                             setCardItem(item);
@@ -149,7 +160,7 @@ const Board = () => {
                                           }}
                                         >
                                           <BiEdit />
-                                        </EditButton>
+                                        </MiniButton>
                                       </TaskWrapper>
                                       {/* </Card> */}
                                     </TaskItem>
@@ -312,7 +323,7 @@ const LoadingTitle = styled.h1`
   margin: 50px 0;
 `;
 
-const EditButton = styled.button`
+const MiniButton = styled.button`
   margin: 0;
   padding: 0;
   border: none;
@@ -321,4 +332,5 @@ const EditButton = styled.button`
   margin-right: 15px;
   cursor: pointer;
 `;
+
 export default Board;
