@@ -8,6 +8,17 @@ import { updateColumnPositionH, updateColumnPositionV } from "../../actions";
 import { useDispatch } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import COLORS from "../COLORS";
+import React from "react";
+import styled from "styled-components";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import Card from "../../components/Card";
+import Sidebar from "../Sidebar";
+import { useSelector } from "react-redux";
+import { updateColumnPositionH, updateColumnPositionV } from "../../actions";
+import { useDispatch } from "react-redux";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import COLORS from "../COLORS";
+import { BiEdit } from "react-icons/bi";
 
 //## COMPONENTS ##
 import { ColumnHeader } from "./ColumnHeader";
@@ -106,7 +117,18 @@ const Board = () => {
                                     }}
                                   >
                                     {/* <Card item={item} columnId={columnId}> */}
-                                    {item.content}
+                                    <TaskWrapper>
+                                      <span
+                                        style={{
+                                          minWidth: "190px",
+                                        }}
+                                      >
+                                        {item.content}
+                                      </span>
+                                      <EditButton>
+                                        <BiEdit />
+                                      </EditButton>
+                                    </TaskWrapper>
                                     {/* </Card> */}
                                   </TaskItem>
                                 );
@@ -185,6 +207,13 @@ const TaskItem = styled.div`
   color: #000;
   border-radius: 10px;
   border: 2px solid ${COLORS.btnPrimary};
+  border: 2px solid ${COLORS.outlinePrimary};
+`;
+
+const TaskWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
 `;
 
 const Loading = styled.div`
@@ -200,4 +229,13 @@ const LoadingTitle = styled.h1`
   margin: 50px 0;
 `;
 
+const EditButton = styled.button`
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  margin-right: 15px;
+  cursor: pointer;
+`;
 export default Board;
