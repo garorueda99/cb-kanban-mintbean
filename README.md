@@ -51,9 +51,9 @@ No need for peer review if you know for sure this wont brick anything. Once you 
 
 - ~~The user can move tasks between columns using drag-and-drop~~
 
-- The user can delete a task.
+- The user can delete a task. (Andres)
 
-- The user can expand a task card to see its description
+- The user can expand a task card to see its description (Andres)
 
 - ~~The user can move tasks between columns using the "Move" button in the context menu~~
 
@@ -69,17 +69,15 @@ No need for peer review if you know for sure this wont brick anything. Once you 
 
   - ~~Tooltips~~
   - ~~Clear All~~
-  - Info bubble
+  - Info bubble (dont really need)
 
-- Create a landing Page
-
-  - Link to Dev's social media
+- ~~Create a landing Page~~
 
   # NEW FEATURES LEFT
 
-- Get Started button launches user form to enter Kanban Board name
+- Get Started button launches user form to enter Kanban Board name (Thinh)
 
-- Warning when you close a column using a snackbar - (Gia)
+- Warning when you close a column using a snackbar - (Thinh)
 
 - Mobile responsive - (Adonis)
 
@@ -97,14 +95,12 @@ No need for peer review if you know for sure this wont brick anything. Once you 
 
 - Each card has a context menu you can access through long-press (mobile).
 
-- Nice animations
+- Nice animations (transition animation?)
 
 - The user can access the context menu using right-click
 
 - The user can add images as attachments to the cards (yes, it is possible to save images to localstorage, https://stackoverflow.com/questions/19183180/how-to-save-an-image-to-localstorage-and-display-it-on-the-next-page)
 
 - Data is saved to LocalStorage or IndexedDB (to avoid collisions when using FeaturePeek, please use a unique name for the namespace you're saving your data to) - (Thinh)
-
-- Something cooler? More creative? It's your site! Make it however you want, we're looking forward to seeing your creativity!
 
 - Tutorial on the landing Page (IMPORTANT! - Thinh)
