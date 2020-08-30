@@ -61,7 +61,3 @@ export const toggleWarningModal = () => ({
 export const deleteAllTasks = () => ({
   type: "DELETE_ALL_TASKS",
 });
-
-// export const cancelDeleteAllTasks = () => ({
-//   type: "CANCEL_DELETE_ALL_TASKS",
-// });

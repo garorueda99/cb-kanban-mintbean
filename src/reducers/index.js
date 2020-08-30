@@ -126,12 +126,6 @@ export default function columnReducer(state = initialState, action) {
       });
     }
 
-    case "CANCEL_DELETE_ALL_TASKS": {
-      // TO DO
-      console.log("cancel delete all tasks");
-      return;
-    }
-
     default:
       return state;
   }

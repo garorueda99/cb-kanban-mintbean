@@ -19,7 +19,6 @@ const PurchaseModal = (props) => {
   const handleClose = () => {
     console.log("close");
     dispatch(toggleWarningModal());
-    // cancelDeleteAllTasks();
   };
 
   const handleClick = (e) => {
