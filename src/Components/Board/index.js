@@ -105,9 +105,9 @@ const Board = () => {
                                       ...provided.draggableProps.style,
                                     }}
                                   >
-                                    <Card item={item} columnId={columnId}>
-                                      {item.content}
-                                    </Card>
+                                    {/* <Card item={item} columnId={columnId}> */}
+                                    {item.content}
+                                    {/* </Card> */}
                                   </TaskItem>
                                 );
                               }}

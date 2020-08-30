@@ -1,12 +1,13 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
-import { addCard, removeColumn } from "../../actions";
-import { useDispatch } from "react-redux";
-import { FiPlusCircle, FiXCircle } from "react-icons/fi";
-import COLORS from "../COLORS";
+import { addCard, removeColumn } from '../../actions';
+import { useDispatch } from 'react-redux';
+import { FiPlusCircle, FiXCircle } from 'react-icons/fi';
+import COLORS from '../COLORS';
 
 export const ColumnHeader = ({ id, name, isEmpty }) => {
+  const [formName, setFormName] = useState(name);
   const dispatch = useDispatch();
   return (
     <Wrapper>
@@ -19,7 +20,12 @@ export const ColumnHeader = ({ id, name, isEmpty }) => {
         <FiPlusCircle size={32} />
       </AddButton>
 
-      <HeaderInput value={name} />
+      <HeaderInput
+        value={formName}
+        onChange={(e) => {
+          setFormName(e.target.value);
+        }}
+      />
       {/* <div style={{ margin: 8 }}> */}
 
       <ClosedButton
