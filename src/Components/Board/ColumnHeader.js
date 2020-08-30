@@ -71,10 +71,11 @@ export const ColumnHeader = ({
       >
         <AddButton
           onClick={() => {
+            console.log('====>', columns[id].items.length, columns[id].items);
             dispatch(addCard(id));
             setColumnCard(id);
             setCardItem(columns[id].items[columns[id].items.length - 1]);
-            setCardStatus((n) => !n);
+            // setCardStatus((n) => !n);
           }}
         >
           <FiPlusCircle size={32} />
