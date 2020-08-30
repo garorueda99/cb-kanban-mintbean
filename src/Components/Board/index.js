@@ -80,11 +80,11 @@ const Board = () => {
                       <TasksContainer
                         {...provided.droppableProps}
                         ref={provided.innerRef}
-                        style={{
-                          border: snapshot.isDraggingOver
-                            ? "1px solid gainsboro"
-                            : "1px solid white",
-                        }}
+                        // style={{
+                        //   background: snapshot.isDraggingOver
+                        //     ? "gainsboro"
+                        //     : "white",
+                        // }}
                       >
                         {column.items.map((item, index) => {
                           return (
@@ -176,7 +176,7 @@ const ColumnContainer = styled.div`
   flex-direction: column;
   align-items: center;
   border: 1px solid gainsboro;
-  border-radius: 20px;
+  border-radius: 5px;
   margin: 12px;
   width: 350px;
   box-shadow: 0px 2px 2px 2px rgba(211, 211, 211, 0.75);
@@ -195,7 +195,7 @@ const TaskItem = styled.div`
   /* margin: 0 0 20px 0; */
   margin: 20px;
   color: #000;
-  border-radius: 10px;
+  border-radius: 4px;
   border: 2px solid ${COLORS.btnPrimary};
   border: 2px solid ${COLORS.outlinePrimary};
 `;

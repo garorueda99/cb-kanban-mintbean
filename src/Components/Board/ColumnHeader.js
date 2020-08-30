@@ -6,19 +6,34 @@ import { useDispatch } from "react-redux";
 import { FiPlusCircle, FiXCircle } from "react-icons/fi";
 import COLORS from "../COLORS";
 
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/material.css";
+import "tippy.js/animations/scale-subtle.css";
+
 export const ColumnHeader = ({ id, name, isEmpty }) => {
   const [formName, setFormName] = useState(name);
   const dispatch = useDispatch();
   return (
     <Wrapper>
-      <AddButton
-        onClick={() => {
-          // console.log('New Card Added', columnId);
-          dispatch(addCard(id));
-        }}
+      <Tippy
+        content={"New task"}
+        placement="top"
+        animation="scale-subtle"
+        theme="material"
+        arrow={true}
+        duration={200}
+        delay={[400, 0]}
+        distance={8}
       >
-        <FiPlusCircle size={32} />
-      </AddButton>
+        <AddButton
+          onClick={() => {
+            dispatch(addCard(id));
+          }}
+        >
+          <FiPlusCircle size={32} />
+        </AddButton>
+      </Tippy>
 
       <HeaderInput
         value={formName}
@@ -28,15 +43,26 @@ export const ColumnHeader = ({ id, name, isEmpty }) => {
       />
       {/* <div style={{ margin: 8 }}> */}
 
-      <ClosedButton
-        onClick={() => {
-          if (isEmpty) {
-            dispatch(removeColumn(id));
-          }
-        }}
+      <Tippy
+        content={"Close"}
+        placement="top"
+        animation="scale-subtle"
+        theme="material"
+        arrow={true}
+        duration={200}
+        delay={[400, 0]}
+        distance={8}
       >
-        <FiXCircle size={32} />
-      </ClosedButton>
+        <ClosedButton
+          onClick={() => {
+            if (isEmpty) {
+              dispatch(removeColumn(id));
+            }
+          }}
+        >
+          <FiXCircle size={32} />
+        </ClosedButton>
+      </Tippy>
     </Wrapper>
   );
 };
@@ -45,13 +71,8 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin: 8px; */
-  /* border: 2px dashed purple; */
-  /* background-color: dodgerblue; */
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  /* padding: 2px; */
-  /* border: 1px solid ${COLORS.outlineGrey}; */
 `;
 
 const HeaderInput = styled.input`
@@ -63,13 +84,10 @@ const HeaderInput = styled.input`
   text-align: center;
   border: none;
   color: ${COLORS.textPrimary};
-  /* color: white; */
   outline: none;
   background-color: inherit;
   &:focus {
-    /* background-color: ${COLORS.outlineGrey}; */
-    color: ${COLORS.btnSecondary};
-    /* outline: 1px solid ${COLORS.outlineGrey}; */
+    color: grey;
     border-bottom: 1px solid ${COLORS.outlineGrey};
   }
 `;
@@ -79,14 +97,7 @@ const AddButton = styled.button`
   border: none;
   outline: none;
   cursor: pointer;
-
-  &:hover {
-    color: ${COLORS.btnAdd};
-  }
-
-  &:focus {
-    color: ${COLORS.btnAdd};
-  }
+  color: ${COLORS.btnAdd};
 
   &:active {
     transform: scale(1.1);
@@ -99,14 +110,7 @@ const ClosedButton = styled.button`
   border: none;
   outline: none;
   cursor: pointer;
-
-  &:hover {
-    color: ${COLORS.btnClose};
-  }
-
-  &:focus {
-    color: ${COLORS.btnClose};
-  }
+  color: ${COLORS.btnClose};
 
   &:active {
     transform: scale(1.1);

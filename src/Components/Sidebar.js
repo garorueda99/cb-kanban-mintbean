@@ -6,7 +6,7 @@ import uuid from "uuid/v4";
 import CreateColumn from "./CreateColumn";
 import { addColumn } from "../actions";
 import COLORS from "./COLORS";
-import { FiArrowLeft, FiEdit, FiDelete } from "react-icons/fi";
+import { FiArrowLeft, FiEdit, FiTrash2 } from "react-icons/fi";
 
 // ## TIPPY TOOLTIPS ##
 import Tippy from "@tippyjs/react";
@@ -30,13 +30,13 @@ const Sidebar = () => {
         <SidebarList>
           <li>
             <Tippy
-              content={"Return back to landing page"}
+              content={"Back"}
               placement="right"
               animation="scale-subtle"
               theme="material"
               arrow={true}
               duration={200}
-              delay={[75, 0]}
+              delay={[400, 0]}
               distance={8}
             >
               <StyledNavLink exact to="/">
@@ -46,13 +46,13 @@ const Sidebar = () => {
           </li>
           <li>
             <Tippy
-              content={"Add a new Column"}
+              content={"New column"}
               placement="right"
               animation="scale-subtle"
               theme="material"
               arrow={true}
               duration={200}
-              delay={[75, 0]}
+              delay={[400, 0]}
               distance={8}
             >
               <Button onClick={() => dispatch(addColumn(column, id))}>
@@ -62,17 +62,17 @@ const Sidebar = () => {
           </li>
           <li>
             <Tippy
-              content={"Clear all empty Columns"}
+              content={"Clear all tasks"}
               placement="right"
               animation="scale-subtle"
               theme="material"
               arrow={true}
               duration={200}
-              delay={[75, 0]}
+              delay={[400, 0]}
               distance={8}
             >
               <Button onClick={() => console.log("Clear All Tasks")}>
-                <FiDelete size={36} />
+                <FiTrash2 size={36} />
               </Button>
             </Tippy>
           </li>
