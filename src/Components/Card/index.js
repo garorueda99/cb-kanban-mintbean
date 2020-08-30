@@ -3,6 +3,10 @@ import styled, { keyframes } from 'styled-components';
 import Header from './Header';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { useDispatch } from 'react-redux';
+import { saveCardInfo } from '../../actions';
+
+const info = 'info';
 
 const close = keyframes`
 0%{
@@ -16,13 +20,10 @@ const close = keyframes`
 }
 `;
 
-export default function Card({ children, state, setState }) {
+export default function Card({ children, columnId, taskId }) {
+  const dispatch = useDispatch();
   return (
-    <CardWrapper
-      style={{
-        display: !state ? 'inline' : 'none',
-      }}
-    >
+    <CardWrapper>
       <Header title={children} />
       <ContentWrapper>
         <TextField
@@ -33,7 +34,12 @@ export default function Card({ children, state, setState }) {
           defaultValue="Let's start"
           variant='outlined'
         />
-        <Button variant='contained'>SAVE</Button>
+        <Button
+          variant='contained'
+          onClick={dispatch(saveCardInfo(columnId, taskId, info))}
+        >
+          SAVE
+        </Button>
       </ContentWrapper>
     </CardWrapper>
   );
@@ -42,7 +48,7 @@ export default function Card({ children, state, setState }) {
 const CardWrapper = styled.div`
   position: absolute;
   display: flex;
-  flex-direction: 'column';
+  flex-direction: column;
   padding: 15px 10px;
   transform: translate(-50%, -50%) scale(1);
   width: 300px;
