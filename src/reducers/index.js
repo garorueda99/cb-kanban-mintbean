@@ -2,8 +2,8 @@ import uuid from "uuid/v4";
 import produce from "immer";
 
 const testItems = [
-  { id: uuid(), content: "First task", task: "" },
-  { id: uuid(), content: "Second task", task: "" },
+  // { id: uuid(), content: "First task", task: "" },
+  // { id: uuid(), content: "Second task", task: "" },
   // { id: uuid(), content: 'Third task' },
   // { id: uuid(), content: 'Fourth task' },
   // { id: uuid(), content: 'Fifth task' },
