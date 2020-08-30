@@ -9,10 +9,11 @@ export const addCard = (columnId) => ({
   columnId,
 });
 
-export const saveCardInfo = (columnId, taskId) => ({
+export const saveCardInfo = (columnId, item, info) => ({
   type: 'SAVE_CARD_INFO',
   columnId,
-  taskId,
+  item,
+  info,
 });
 
 export const removeColumn = (id) => ({

@@ -130,7 +130,9 @@ const Board = () => {
                                         ...provided.draggableProps.style,
                                       }}
                                     >
-                                      <Card columnId>{item.content}</Card>
+                                      <Card item={item} columnId={columnId}>
+                                        {item.content}
+                                      </Card>
                                     </div>
                                   );
                                 }}

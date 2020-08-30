@@ -46,7 +46,6 @@ export default function columnReducer(state = initialState, action) {
 
     case 'ADD_CARD': {
       const { columnId } = action;
-
       return produce(state, (draftState) => {
         draftState.columns[columnId].items.push({
           id: uuid(),
@@ -56,7 +55,17 @@ export default function columnReducer(state = initialState, action) {
     }
 
     case 'SAVE_CARD_INFO': {
-      return state;
+      const { columnId, item, info } = action;
+
+      const objectFinder = (element) => element.id === item.id;
+      const index = state.columns[columnId].items.findIndex(objectFinder);
+      console.log(state, columnId, index);
+      return produce(state, (draftState) => {
+        draftState.columns[columnId].items[index] = {
+          ...item,
+          task: info,
+        };
+      });
     }
 
     case 'UPDATE_COLUMN_POSITION_HORIZONTALLY': {

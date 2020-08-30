@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Header from './Header';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { saveCardInfo } from '../../actions';
 
 const info = 'info';
@@ -20,7 +20,8 @@ const close = keyframes`
 }
 `;
 
-export default function Card({ children, columnId, taskId }) {
+export default function Card({ children, columnId, item }) {
+  const [info, setInfo] = useState('');
   const dispatch = useDispatch();
   return (
     <CardWrapper>
@@ -33,10 +34,15 @@ export default function Card({ children, columnId, taskId }) {
           rows={4}
           defaultValue="Let's start"
           variant='outlined'
+          onChange={(e) => {
+            setInfo(e.target.value);
+          }}
         />
         <Button
           variant='contained'
-          onClick={dispatch(saveCardInfo(columnId, taskId, info))}
+          onClick={() => {
+            dispatch(saveCardInfo(columnId, item, info));
+          }}
         >
           SAVE
         </Button>
@@ -70,6 +76,6 @@ const CardWrapper = styled.div`
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   flex: 1;
-  border: 1px solid purple;
 `;
