@@ -1,9 +1,9 @@
-import uuid from 'uuid/v4';
-import produce from 'immer';
+import uuid from "uuid/v4";
+import produce from "immer";
 
 const testItems = [
-  { id: uuid(), content: 'First task' },
-  { id: uuid(), content: 'Second task' },
+  { id: uuid(), content: "First task" },
+  { id: uuid(), content: "Second task" },
   // { id: uuid(), content: 'Third task' },
   // { id: uuid(), content: 'Fourth task' },
   // { id: uuid(), content: 'Fifth task' },
@@ -13,15 +13,15 @@ const testItems = [
 const initialState = {
   columns: {
     [uuid()]: {
-      name: 'To do',
+      name: "To do",
       items: testItems,
     },
     [uuid()]: {
-      name: 'In Progress',
+      name: "In Progress",
       items: [],
     },
     [uuid()]: {
-      name: 'Completed',
+      name: "Completed",
       items: [],
     },
   },
@@ -29,25 +29,32 @@ const initialState = {
 
 export default function columnReducer(state = initialState, action) {
   switch (action.type) {
-    case 'ADD_COLUMN': {
+    case "ADD_COLUMN": {
       const { column, id } = action;
 
       return produce(state, (draftState) => {
         draftState.columns[id] = column;
       });
     }
+    case "REMOVE_COLUMN": {
+      const { id } = action;
 
-    case 'ADD_CARD': {
+      return produce(state, (draftState) => {
+        delete draftState.columns[id];
+      });
+    }
+
+    case "ADD_CARD": {
       const { columnId } = action;
 
       return produce(state, (draftState) => {
         draftState.columns[columnId].items.push({
           id: uuid(),
-          content: 'New Task',
+          content: "New Task",
         });
       });
     }
-    case 'UPDATE_COLUMN_POSITION_HORIZONTALLY': {
+    case "UPDATE_COLUMN_POSITION_HORIZONTALLY": {
       const {
         columns,
         sourceId,
@@ -72,7 +79,7 @@ export default function columnReducer(state = initialState, action) {
         };
       });
     }
-    case 'UPDATE_COLUMN_POSITION_VERTICALLY': {
+    case "UPDATE_COLUMN_POSITION_VERTICALLY": {
       const { columns, sourceId, column, copiedItems } = action;
 
       return produce(state, (draftState) => {
