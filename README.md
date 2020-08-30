@@ -53,7 +53,7 @@ No need for peer review if you know for sure this wont brick anything. Once you 
 
 - The user can delete a task. (Andres)
 
-- The user can expand a task card to see its description (Andres)
+- ~~The user can expand a task card to see its description~~ (Andres)
 
 - ~~The user can move tasks between columns using the "Move" button in the context menu~~
 
@@ -89,7 +89,7 @@ No need for peer review if you know for sure this wont brick anything. Once you 
 
 # BONUS FEATURES
 
-- The site is mobile-responsive (highly recommended but not required)
+- ~~The site is mobile-responsive (highly recommended but not required)~~
 
 - Each card has a context menu you can access through right-click (desktop).
 
@@ -101,6 +101,6 @@ No need for peer review if you know for sure this wont brick anything. Once you 
 
 - The user can add images as attachments to the cards (yes, it is possible to save images to localstorage, https://stackoverflow.com/questions/19183180/how-to-save-an-image-to-localstorage-and-display-it-on-the-next-page)
 
-- Data is saved to LocalStorage or IndexedDB (to avoid collisions when using FeaturePeek, please use a unique name for the namespace you're saving your data to) - (Adonis)
+- ~~Data is saved to LocalStorage or IndexedDB (to avoid collisions when using FeaturePeek, please use a unique name for the namespace you're saving your data to)~~ - (Adonis)
 
 - Tutorial on the landing Page (IMPORTANT! - Thinh)

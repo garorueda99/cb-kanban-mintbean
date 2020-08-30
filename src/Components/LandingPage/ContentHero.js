@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components/macro";
 
+import { Link } from "react-router-dom";
+
 import test from "../../assets/test.gif";
 
 import COLORS from "../COLORS";
@@ -10,11 +12,18 @@ export const ContentHero = () => {
     <Wrapper>
       <CardContainer>
         <Column>
-          <Title>Simple. Easy. Organized. Kanban.</Title>
-          <p>Introducing the latest Kaban application to the world</p>
-          <Form action="/board">
-            <Button type="submit">Get Started</Button>
-          </Form>
+          <Title>
+            Simple. Easy. Organized. <h1>Kanban.</h1>
+          </Title>
+          <Text>
+            Introducing the latest Kaban application to the world for your every
+            day productivity needs.
+          </Text>
+          <ButtonContainer>
+            <Button type="submit">
+              <StyledLink to="/board">Get Started</StyledLink>
+            </Button>
+          </ButtonContainer>
         </Column>
         <Column>
           <Animation src={test} />
@@ -35,10 +44,18 @@ const Title = styled.h1`
   font-weight: 400;
   font-size: 56px;
   font-family: "Roboto", sans-serif;
+  & h1 {
+    font-weight: 400;
+    color: ${COLORS.btnPrimary};
+  }
 
   @media (max-width: 860px) {
     text-align: center;
   }
+`;
+
+const Text = styled.p`
+  font-size: 24px;
 `;
 
 const Animation = styled.img`
@@ -46,7 +63,7 @@ const Animation = styled.img`
   width: 100%;
 `;
 
-const Form = styled.form`
+const ButtonContainer = styled.div`
   display: flex;
   /* justify-content: center;
   align-items: center; */
@@ -79,6 +96,11 @@ const Column = styled.div`
   @media (max-width: 860px) {
     text-align: center;
   }
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
 `;
 
 const Button = styled.button`

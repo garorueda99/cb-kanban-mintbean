@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <WarningModal />
-      <FormModal />
+
       <Router>
         <Switch>
           <Route exact={true} path="/">
@@ -27,6 +27,7 @@ function App() {
           </Route>
           <Route path="/board">
             <Board />
+            <FormModal />
           </Route>
         </Switch>
         <GlobalStyles />
