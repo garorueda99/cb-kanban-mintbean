@@ -31,8 +31,8 @@ export default function Card({
   // const index = items.findIndex(objectFinder);
   const [info, setInfo] = useState(item.task);
   console.log('===>', !item);
-  const [title, setTitle] = useState(children);
-  // const dispatch = useDispatch();
+  const [title, setTitle] = useState(item.content);
+  const dispatch = useDispatch();
 
   return (
     <Dialog open={cardStatus} aria-labelledby='form-dialog-title'>
@@ -55,7 +55,7 @@ export default function Card({
               variant='contained'
               onClick={() => {
                 setCardStatus((n) => !n);
-                // dispatch(saveCardInfo(columnId, item, info, title));
+                dispatch(saveCardInfo(columnId, item, info, title));
               }}
             >
               SAVE

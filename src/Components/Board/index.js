@@ -174,6 +174,7 @@ const Board = () => {
           item={cardItem}
           cardStatus={cardStatus}
           setCardStatus={setCartStatus}
+          columnId={columnCard}
         />
       )}
     </Wrapper>
