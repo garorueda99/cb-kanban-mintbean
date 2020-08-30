@@ -58,6 +58,15 @@ export const toggleWarningModal = () => ({
   type: "TOGGLE_WARNING_MODAL",
 });
 
+export const toggleBoardForm = () => ({
+  type: "TOGGLE_BOARD_FORM",
+});
+
+export const updateBoardName = (name) => ({
+  type: "UPDATE_BOARD_NAME",
+  name,
+});
+
 export const deleteAllTasks = () => ({
   type: "DELETE_ALL_TASKS",
 });

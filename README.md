@@ -75,13 +75,13 @@ No need for peer review if you know for sure this wont brick anything. Once you 
 
   # NEW FEATURES LEFT
 
-- Get Started button launches user form to enter Kanban Board name (Thinh)
+- ~~Get Started button launches user form to enter Kanban Board name~~ (Thinh)
 
-- Warning when you close a column using a snackbar - (Thinh)
+- ~~Warning when you close a column using a snackbar~~ - (Thinh)
 
-- Mobile responsive - (Adonis)
+- ~~Mobile responsive~~ - (Adonis)
 
-- Centering the board - (Adonis)
+- Centering the board - (Thinh)
 
 - Dark Mode light mode (low priority)
 
@@ -101,6 +101,6 @@ No need for peer review if you know for sure this wont brick anything. Once you 
 
 - The user can add images as attachments to the cards (yes, it is possible to save images to localstorage, https://stackoverflow.com/questions/19183180/how-to-save-an-image-to-localstorage-and-display-it-on-the-next-page)
 
-- Data is saved to LocalStorage or IndexedDB (to avoid collisions when using FeaturePeek, please use a unique name for the namespace you're saving your data to) - (Thinh)
+- Data is saved to LocalStorage or IndexedDB (to avoid collisions when using FeaturePeek, please use a unique name for the namespace you're saving your data to) - (Adonis)
 
 - Tutorial on the landing Page (IMPORTANT! - Thinh)

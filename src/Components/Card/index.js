@@ -1,62 +1,79 @@
-import React, { useState } from 'react';
-import styled, { keyframes } from 'styled-components';
-import Header from './Header';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { saveCardInfo } from '../../actions';
+import React, { useState } from "react";
+import styled, { keyframes } from "styled-components";
+import Header from "./Header";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { saveCardInfo } from "../../actions";
+import Dialog from "@material-ui/core/Dialog";
 
 const close = keyframes`
 0%{
- transform: translate(50%, -50%) scale(0.25);
+ transform: translate(0%, 15%) scale(0.25);
 }
 55% {
- transform: translate(-50%, -50%) scale(1.15);
+ transform: translate(50%, 50%) scale(1.15);
 }
 100% {
  transform: translate(0%, 0%) scale(1);
 }
 `;
 
-export default function Card({ children, columnId, item }) {
-  const items = useSelector((state) => state.columns[columnId].items);
-  const objectFinder = (element) => element.id === item.id;
-  const index = items.findIndex(objectFinder);
-  console.log('===>', items[index]);
-  const [info, setInfo] = useState(items[index].task);
+export default function Card({
+  children,
+  columnId,
+  item,
+  cardStatus,
+  setCardStatus,
+}) {
+  // const items = useSelector((state) => state.columns[columnId].items);
+  // const objectFinder = (element) => element.id === item.id;
+  // const index = items.findIndex(objectFinder);
+  // console.log('===>', items[index]);
+  // const [info, setInfo] = useState(items[index].task);
+  console.log("===>", !item);
   const [title, setTitle] = useState(children);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   return (
-    <CardWrapper>
-      <Header title={children} setTitle={setTitle} />
-      <ContentWrapper>
-        <TextField
-          id='outlined-multiline-static'
-          label='Description'
-          multiline
-          rows={4}
-          defaultValue={info}
-          variant='outlined'
-          onChange={(e) => {
-            setInfo(e.target.value);
-          }}
-        />
-        <Button
-          variant='contained'
-          onClick={() => {
-            dispatch(saveCardInfo(columnId, item, info, title));
-          }}
-        >
-          SAVE
-        </Button>
-      </ContentWrapper>
-    </CardWrapper>
+    <Dialog open={cardStatus} aria-labelledby="form-dialog-title">
+      {item !== null ? (
+        <CardWrapper>
+          <Header title={item.content} setTitle={setTitle} />
+          <ContentWrapper>
+            <TextField
+              id="outlined-multiline-static"
+              label="Description"
+              multiline
+              rows={4}
+              defaultValue={item.task}
+              variant="outlined"
+              // onChange={(e) => {
+              //   setInfo(e.target.value);
+              // }}
+            />
+            <Button
+              variant="contained"
+              onClick={() => {
+                setCardStatus((n) => !n);
+                // dispatch(saveCardInfo(columnId, item, info, title));
+              }}
+            >
+              SAVE
+            </Button>
+          </ContentWrapper>
+        </CardWrapper>
+      ) : (
+        "LOADING"
+      )}
+    </Dialog>
   );
 }
 
 const CardWrapper = styled.div`
-  position: absolute;
+  position: fixed;
+  top: 50%;
+  left: 50%;
   display: flex;
   flex-direction: column;
   padding: 15px 10px;
@@ -73,7 +90,7 @@ const CardWrapper = styled.div`
   );
   box-shadow: 0 10px 15px 0 #888888;
   border-radius: 12px;
-  animation: ${close} 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+  /* animation: ${close} 0.9s cubic-bezier(0.075, 0.82, 0.165, 1); */
   animation-fill-mode: forwards;
 `;
 

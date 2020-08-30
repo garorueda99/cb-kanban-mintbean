@@ -88,13 +88,13 @@ const Wrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  min-height: 100%;
 `;
 
 const Container = styled.div`
-  min-width: 100px;
+  min-width: 60px;
   min-height: 100vh;
   padding: 5%;
-  /* border: 1px solid red; */
 
   box-shadow: 0px 2px 2px 2px rgba(211, 211, 211, 0.75);
   border-right: 1px solid gainsboro;
@@ -102,7 +102,6 @@ const Container = styled.div`
 
 const SidebarList = styled.ul`
   padding: 5%;
-  /* border: 3px dashed red; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -138,8 +137,6 @@ const Button = styled.button`
 `;
 
 const StyledNavLink = styled(Link)`
-  /* color: ${COLORS.btnSecondary}; */
-
   &:hover {
     color: ${COLORS.btnSecondary};
     border-radius: 30px;

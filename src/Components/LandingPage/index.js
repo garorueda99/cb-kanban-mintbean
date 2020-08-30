@@ -16,8 +16,6 @@ const LandingPage = () => {
 };
 
 const Wrapper = styled.div`
-  /* border: 5px solid red; */
-  position: relative;
   min-height: 100vh;
 `;
 
