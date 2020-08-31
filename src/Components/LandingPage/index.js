@@ -10,7 +10,7 @@ const LandingPage = () => {
     <Wrapper>
       <Header />
       <MainContent />
-      <Footer />
+      {/* <Footer /> */}
     </Wrapper>
   );
 };
