@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 // ### IMPORT COMPONENTS ###
-import GlobalStyles from "./components/GlobalStyles";
-import Board from "./components/Board";
-import LandingPage from "./components/LandingPage";
-import WarningModal from "./components/WarningModal";
-import ClearAllModal from "./components/ClearAllModal";
-import FormModal from "./components/FormModal";
+import GlobalStyles from "./Components/GlobalStyles";
+import Board from "./Components/Board";
+import LandingPage from "./Components/LandingPage";
+import WarningModal from "./Components/WarningModal";
+import ClearAllModal from "./Components/ClearAllModal";
+import FormModal from "./Components/FormModal";
 
 function App() {
   const state = useSelector((state) => state);
