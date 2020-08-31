@@ -139,9 +139,8 @@ export const ColumnHeader = ({
         autoHideDuration={2000}
         onClose={warningMsgClose}
       >
-        <Alert onClose={warningMsgClose} severity="warning">
+        <Alert onClose={warningMsgClose} severity='warning'>
           Unable to remove, there are tasks in this column.
-
         </Alert>
       </Snackbar>
       <Snackbar
