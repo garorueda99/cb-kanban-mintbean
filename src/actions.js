@@ -73,6 +73,10 @@ export const toggleRemoveColumn = () => ({
   type: 'TOGGLE_REMOVE_COLUMN',
 });
 
+export const toggleCardModal = () => ({
+  type: 'TOGGLE_CARD_MODAL',
+});
+
 export const updateBoardName = (name) => ({
   type: 'UPDATE_BOARD_NAME',
   name,

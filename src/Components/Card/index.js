@@ -4,7 +4,7 @@ import Header from './Header';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
-import { saveCardInfo, deleteCard } from '../../actions';
+import { saveCardInfo, deleteCard, toggleCardModal } from '../../actions';
 import Dialog from '@material-ui/core/Dialog';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -45,8 +45,16 @@ export default function Card({ columnId, item, cardStatus, setCardStatus }) {
     // TO DO: Send priority value to state
   };
 
+  const handleClose = () => {
+    dispatch(toggleCardModal());
+  };
+
   return (
-    <Dialog open={cardStatus} aria-labelledby='form-dialog-title'>
+    <Dialog
+      open={cardStatus}
+      aria-labelledby='form-dialog-title'
+      onClose={() => setCardStatus((n) => !n)}
+    >
       {item !== null ? (
         <CardWrapper>
           <Header title={item.content} setTitle={setTitle} />

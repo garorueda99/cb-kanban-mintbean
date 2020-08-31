@@ -1,16 +1,16 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import styled from "styled-components";
-import Dialog from "@material-ui/core/Dialog";
-import { FiPlusCircle, FiXCircle } from "react-icons/fi";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/material.css";
-import "tippy.js/animations/scale-subtle.css";
+import styled from 'styled-components';
+import Dialog from '@material-ui/core/Dialog';
+import { FiPlusCircle, FiXCircle } from 'react-icons/fi';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/themes/material.css';
+import 'tippy.js/animations/scale-subtle.css';
 
-import COLORS from "./COLORS";
-import { deleteAllTasks, toggleWarningModal } from "../actions";
+import COLORS from './COLORS';
+import { deleteAllTasks, toggleWarningModal } from '../actions';
 
 const PurchaseModal = (props) => {
   const dispatch = useDispatch();
@@ -29,15 +29,15 @@ const PurchaseModal = (props) => {
   return (
     <Dialog
       onClose={handleClose}
-      aria-labelledby="warning"
+      aria-labelledby='warning'
       open={state.openModal}
     >
       <ModalContentWrapper>
         <div style={{ paddingBottom: 20 }}>
           <div
             style={{
-              display: "flex",
-              justifyContent: "center",
+              display: 'flex',
+              justifyContent: 'center',
               marginBottom: 40,
             }}
           >
@@ -45,12 +45,12 @@ const PurchaseModal = (props) => {
           </div>
           <div
             style={{
-              display: "flex",
-              justifyContent: "center",
+              display: 'flex',
+              justifyContent: 'center',
               marginBottom: 30,
             }}
           >
-            <p style={{ color: "grey" }}>
+            <p style={{ color: 'grey' }}>
               This will delete all tasks from your kanban board.
             </p>
           </div>
@@ -58,10 +58,10 @@ const PurchaseModal = (props) => {
 
         <ButtonWrapper>
           <Tippy
-            content={"Yes"}
-            placement="top"
-            animation="scale-subtle"
-            theme="material"
+            content={'Yes'}
+            placement='top'
+            animation='scale-subtle'
+            theme='material'
             arrow={true}
             duration={200}
             delay={[400, 0]}
@@ -73,10 +73,10 @@ const PurchaseModal = (props) => {
           </Tippy>
 
           <Tippy
-            content={"Cancel"}
-            placement="top"
-            animation="scale-subtle"
-            theme="material"
+            content={'Cancel'}
+            placement='top'
+            animation='scale-subtle'
+            theme='material'
             arrow={true}
             duration={200}
             delay={[400, 0]}
