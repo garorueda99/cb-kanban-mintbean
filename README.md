@@ -77,7 +77,7 @@ No need for peer review if you know for sure this wont brick anything. Once you 
 
 - ~~Get Started button launches user form to enter Kanban Board name~~ (Thinh)
 
-- ~~Warning when you close a column using a snackbar~~ - (Thinh)
+- Warning when you close a column using a snackbar - (Thinh)
 
 - ~~Mobile responsive~~ - (Adonis)
 
