@@ -1,31 +1,31 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import { addCard, removeColumn } from '../../actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { FiPlusCircle, FiXCircle } from 'react-icons/fi';
-import COLORS from '../COLORS';
+import { addCard, removeColumn } from "../../actions";
+import { useDispatch, useSelector } from "react-redux";
+import { FiPlusCircle, FiXCircle } from "react-icons/fi";
+import COLORS from "../COLORS";
 
 // ## FOR SNACKBAR MESSAGES
-import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-import { makeStyles } from '@material-ui/core/styles';
+import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import { makeStyles } from "@material-ui/core/styles";
 
 //## TOOLTIPS
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
-import 'tippy.js/themes/material.css';
-import 'tippy.js/animations/scale-subtle.css';
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/material.css";
+import "tippy.js/animations/scale-subtle.css";
 
 function Alert(props) {
-  return <MuiAlert elevation={6} variant='filled' {...props} />;
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
-    '& > * + *': {
+    width: "100%",
+    "& > * + *": {
       marginTop: theme.spacing(2),
     },
   },
@@ -41,29 +41,46 @@ export const ColumnHeader = ({
 }) => {
   const columns = useSelector((state) => state.columns);
   const [formName, setFormName] = useState(name);
-  const [open, setOpen] = React.useState(false);
+  const [toggleWarning, setToggleWarning] = React.useState(false);
+  const [toggleRemove, setToggleRemove] = React.useState(false);
 
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  const handleClick = () => {
-    setOpen(true);
+  const warningMsgOpen = () => {
+    setToggleWarning(true);
   };
 
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+  const warningMsgClose = (event, reason) => {
+    if (reason === "clickaway") {
       return;
     }
-    setOpen(false);
+    setToggleWarning(false);
   };
+
+  //############################# DELETE MODAL ###############################
+
+  const deleteMsgOpen = () => {
+    console.log("Hello there");
+    setToggleRemove(true);
+  };
+
+  const deleteMsgClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setToggleRemove(false);
+  };
+
+  //######################################################################
 
   return (
     <Wrapper>
       <Tippy
-        content={'New task'}
-        placement='top'
-        animation='scale-subtle'
-        theme='material'
+        content={"New task"}
+        placement="top"
+        animation="scale-subtle"
+        theme="material"
         arrow={true}
         duration={200}
         delay={[400, 0]}
@@ -71,7 +88,7 @@ export const ColumnHeader = ({
       >
         <AddButton
           onClick={() => {
-            console.log('====>', columns[id].items.length, columns[id].items);
+            console.log("====>", columns[id].items.length, columns[id].items);
             dispatch(addCard(id));
             setColumnCard(id);
             setCardItem(columns[id].items[columns[id].items.length - 1]);
@@ -91,10 +108,10 @@ export const ColumnHeader = ({
       {/* <div style={{ margin: 8 }}> */}
 
       <Tippy
-        content={'Close'}
-        placement='top'
-        animation='scale-subtle'
-        theme='material'
+        content={"Close"}
+        placement="top"
+        animation="scale-subtle"
+        theme="material"
         arrow={true}
         duration={200}
         delay={[400, 0]}
@@ -104,17 +121,31 @@ export const ColumnHeader = ({
           onClick={() => {
             if (isEmpty) {
               dispatch(removeColumn(id));
+              deleteMsgOpen();
             } else {
-              handleClick();
+              warningMsgOpen();
             }
           }}
         >
           <FiXCircle size={32} />
         </ClosedButton>
       </Tippy>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity='warning'>
-          Unable to remove, there are task(s) in this column!
+      <Snackbar
+        open={toggleWarning}
+        autoHideDuration={2000}
+        onClose={warningMsgClose}
+      >
+        <Alert onClose={warningMsgClose} severity="warning">
+          Unable to remove, there are task(s) in this column.
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={toggleRemove}
+        autoHideDuration={2000}
+        onClose={deleteMsgClose}
+      >
+        <Alert onClose={deleteMsgClose} severity="error">
+          Column was removed.
         </Alert>
       </Snackbar>
     </Wrapper>

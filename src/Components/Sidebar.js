@@ -24,7 +24,8 @@ function Alert(props) {
 }
 
 const Sidebar = () => {
-  const [open, setOpen] = React.useState(false);
+  const [isMaxCols, setIsMaxCols] = React.useState(false);
+  const [addCol, setAddCol] = React.useState(false);
   const id = uuid();
   let name = "New column";
   const dispatch = useDispatch();
@@ -39,15 +40,30 @@ const Sidebar = () => {
 
   const numCols = Object.keys(state.columns).length;
 
-  const handleClick = () => {
-    setOpen(true);
+  //############################# MAX COLS MSG #####################
+
+  const maxColsMsgOpen = () => {
+    setIsMaxCols(true);
   };
 
-  const handleClose = (event, reason) => {
+  const maxColsMsgClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-    setOpen(false);
+    setIsMaxCols(false);
+  };
+
+  //########################## NEW COL MSG #########################
+
+  const addColMsgOpen = () => {
+    setAddCol(true);
+  };
+
+  const addColMsgClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setAddCol(false);
   };
 
   return (
@@ -84,10 +100,11 @@ const Sidebar = () => {
               <Button
                 onClick={() => {
                   if (numCols < 6) {
+                    addColMsgOpen();
                     dispatch(addColumn(column, id));
                   } else {
                     // window.alert("Too many columns");
-                    handleClick();
+                    maxColsMsgOpen();
                   }
                 }}
               >
@@ -106,16 +123,29 @@ const Sidebar = () => {
               delay={[400, 0]}
               distance={8}
             >
-              <Button onClick={() => dispatch(toggleWarningModal())}>
+              <Button
+                onClick={() => {
+                  dispatch(toggleWarningModal());
+                }}
+              >
                 <FiTrash2 size={36} />
               </Button>
             </Tippy>
           </li>
         </SidebarList>
       </Container>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error">
-          Max Columns Reached!
+      <Snackbar
+        open={isMaxCols}
+        autoHideDuration={2000}
+        onClose={maxColsMsgClose}
+      >
+        <Alert onClose={maxColsMsgClose} severity="info">
+          Max Columns Reached.
+        </Alert>
+      </Snackbar>
+      <Snackbar open={addCol} autoHideDuration={2000} onClose={addColMsgClose}>
+        <Alert onClose={addColMsgClose} severity="success">
+          New Column Added.
         </Alert>
       </Snackbar>
     </Wrapper>
