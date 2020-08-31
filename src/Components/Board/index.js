@@ -20,6 +20,12 @@ import { AiOutlineDelete } from "react-icons/ai";
 //## COMPONENTS ##
 import { ColumnHeader } from "./ColumnHeader";
 
+// ## TIPPY TOOLTIPS ##
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/material.css";
+import "tippy.js/animations/scale-subtle.css";
+
 const Board = () => {
   const dispatch = useDispatch();
   const columns = useSelector((state) => state.columns);
@@ -147,24 +153,46 @@ const Board = () => {
                                         >
                                           {item.content}
                                         </span>
-                                        <MiniButton
-                                          onClick={() => {
-                                            dispatch(
-                                              deleteCard(columnId, item.id)
-                                            );
-                                          }}
+                                        <Tippy
+                                          content={"Delete Task"}
+                                          placement="top"
+                                          animation="scale-subtle"
+                                          theme="material"
+                                          arrow={true}
+                                          duration={200}
+                                          delay={[1000, 0]}
+                                          distance={8}
                                         >
-                                          <AiOutlineDelete />
-                                        </MiniButton>
-                                        <MiniButton
-                                          onClick={() => {
-                                            setCardStatus((n) => !n);
-                                            setCardItem(item);
-                                            setColumnCard(columnId);
-                                          }}
+                                          <MiniButton
+                                            onClick={() => {
+                                              dispatch(
+                                                deleteCard(columnId, item.id)
+                                              );
+                                            }}
+                                          >
+                                            <AiOutlineDelete />
+                                          </MiniButton>
+                                        </Tippy>
+                                        <Tippy
+                                          content={"Edit Task"}
+                                          placement="top"
+                                          animation="scale-subtle"
+                                          theme="material"
+                                          arrow={true}
+                                          duration={200}
+                                          delay={[1000, 0]}
+                                          distance={8}
                                         >
-                                          <BiEdit />
-                                        </MiniButton>
+                                          <MiniButton
+                                            onClick={() => {
+                                              setCardStatus((n) => !n);
+                                              setCardItem(item);
+                                              setColumnCard(columnId);
+                                            }}
+                                          >
+                                            <BiEdit />
+                                          </MiniButton>
+                                        </Tippy>
                                       </TaskWrapper>
                                       {/* </Card> */}
                                     </TaskItem>
@@ -335,6 +363,9 @@ const LoadingTitle = styled.h1`
 `;
 
 const MiniButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
   padding: 0;
   border: none;
@@ -342,6 +373,20 @@ const MiniButton = styled.button`
   font-size: 24px;
   margin-right: 15px;
   cursor: pointer;
+
+  &:hover {
+    color: ${COLORS.btnPrimary};
+  }
+
+  &:active {
+    outline: none;
+    transform: scale(1.1);
+  }
+
+  &:focus {
+    outline: none;
+    color: ${COLORS.btnPrimary};
+  }
 `;
 
 export default Board;
