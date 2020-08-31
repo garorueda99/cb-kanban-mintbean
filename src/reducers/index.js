@@ -32,6 +32,7 @@ const initialState = JSON.parse(
   kanbanName: undefined,
   toggleDelete: false,
   openClearAllModal: false,
+  cardModal: false,
 };
 
 export default function columnReducer(state = initialState, action) {
@@ -140,6 +141,12 @@ export default function columnReducer(state = initialState, action) {
     case "TOGGLE_BOARD_FORM": {
       return produce(state, (draftState) => {
         draftState.kanbanForm = !draftState.kanbanForm;
+      });
+    }
+
+    case "TOGGLE_CARD_MODAL": {
+      return produce(state, (draftState) => {
+        draftState.cardModal = !draftState.cardModal;
       });
     }
 
