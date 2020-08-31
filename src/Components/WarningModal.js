@@ -1,16 +1,16 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import styled from 'styled-components';
-import Dialog from '@material-ui/core/Dialog';
-import { FiPlusCircle, FiXCircle } from 'react-icons/fi';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
-import 'tippy.js/themes/material.css';
-import 'tippy.js/animations/scale-subtle.css';
+import styled from "styled-components";
+import Dialog from "@material-ui/core/Dialog";
+import { FiPlusCircle, FiXCircle } from "react-icons/fi";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/material.css";
+import "tippy.js/animations/scale-subtle.css";
 
-import COLORS from './COLORS';
-import { deleteAllTasks, toggleWarningModal } from '../actions';
+import COLORS from "./COLORS";
+import { deleteAllTasks, toggleWarningModal } from "../actions";
 
 const WarningModal = (props) => {
   const dispatch = useDispatch();
@@ -29,63 +29,36 @@ const WarningModal = (props) => {
   return (
     <Dialog
       onClose={handleClose}
-      aria-labelledby='warning'
+      aria-labelledby="warning"
       open={state.openModal}
     >
       <ModalContentWrapper>
         <div style={{ paddingBottom: 20 }}>
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'center',
+              display: "flex",
+              justifyContent: "center",
               marginBottom: 40,
             }}
           >
-            <h1 style={{ fontSize: 24 }}>Are you sure?</h1>
+            <h1 style={{ fontSize: 24 }}>Delete all Tasks?</h1>
           </div>
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'center',
+              display: "flex",
+              justifyContent: "center",
               marginBottom: 30,
             }}
           >
-            <p style={{ color: 'grey' }}>
-              This will delete all tasks from your kanban board.
+            <p style={{ color: "grey" }}>
+              This will remove all tasks from your kanban board.
             </p>
           </div>
         </div>
 
         <ButtonWrapper>
-          <Tippy
-            content={'Yes'}
-            placement='top'
-            animation='scale-subtle'
-            theme='material'
-            arrow={true}
-            duration={200}
-            delay={[400, 0]}
-            distance={8}
-          >
-            <AddButton onClick={handleClick}>
-              <FiPlusCircle size={32} />
-            </AddButton>
-          </Tippy>
-
-          <Tippy
-            content={'Cancel'}
-            placement='top'
-            animation='scale-subtle'
-            theme='material'
-            arrow={true}
-            duration={200}
-            delay={[400, 0]}
-            distance={8}
-          >
-            <ClosedButton onClick={handleClose}>
-              <FiXCircle size={32} />
-            </ClosedButton>
-          </Tippy>
+          <AddButton onClick={handleClick}>Okay</AddButton>
+          <ClosedButton onClick={handleClose}>Cancel</ClosedButton>
         </ButtonWrapper>
       </ModalContentWrapper>
     </Dialog>
@@ -102,26 +75,58 @@ const ButtonWrapper = styled.div`
 `;
 
 const AddButton = styled.button`
-  background: transparent;
-  border: none;
+  font-size: 22px;
+  padding: 8px 12px;
+  background-color: white;
+  border: 3px solid transparent;
   cursor: pointer;
+  border-radius: 15px;
   color: ${COLORS.btnAdd};
 
   &:active {
     transform: scale(1.1);
     color: ${COLORS.btnAdd};
   }
+
+  &:hover {
+    border: 3px solid ${COLORS.btnAdd};
+    background-color: ${COLORS.btnAdd};
+    color: white;
+  }
+
+  &:focus {
+    outline: none;
+    border: 3px solid ${COLORS.btnAdd};
+    background-color: ${COLORS.btnAdd};
+    color: white;
+  }
 `;
 
 const ClosedButton = styled.button`
-  background: transparent;
-  border: none;
+  font-size: 22px;
+  padding: 8px 12px;
+  background-color: white;
+  border: 3px solid transparent;
   cursor: pointer;
+  border-radius: 15px;
   color: ${COLORS.btnClose};
 
   &:active {
     transform: scale(1.1);
     color: ${COLORS.btnClose};
+  }
+
+  &:hover {
+    border: 3px solid ${COLORS.btnClose};
+    background-color: ${COLORS.btnClose};
+    color: white;
+  }
+
+  &:focus {
+    outline: none;
+    border: 3px solid ${COLORS.btnClose};
+    background-color: ${COLORS.btnClose};
+    color: white;
   }
 `;
 
