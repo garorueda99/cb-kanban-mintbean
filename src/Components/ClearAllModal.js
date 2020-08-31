@@ -23,8 +23,8 @@ const ClearAllModal = (props) => {
   const handleClick = (e) => {
     e.preventDefault();
     window.localStorage.clear();
-    dispatch(toggleClearAllModal());
     dispatch(deleteEverything());
+    dispatch(toggleClearAllModal());
   };
 
   return (

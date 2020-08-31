@@ -7,6 +7,7 @@ import GlobalStyles from "./components/GlobalStyles";
 import Board from "./components/Board";
 import LandingPage from "./components/LandingPage";
 import WarningModal from "./components/WarningModal";
+import ClearAllModal from "./components/ClearAllModal";
 import FormModal from "./components/FormModal";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
   return (
     <>
       <WarningModal />
+      <ClearAllModal />
 
       <Router>
         <Switch>

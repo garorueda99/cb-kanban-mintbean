@@ -156,14 +156,6 @@ export const ColumnHeader = ({
           Column was removed.
         </Alert>
       </Snackbar>
-
-      <Snackbar
-        open={taskAdded}
-        autoHideDuration={2000}
-        onClose={() => setTaskAdded((n) => !n)}
-      >
-        <Alert severity='error'>Task was added.</Alert>
-      </Snackbar>
     </Wrapper>
   );
 };
