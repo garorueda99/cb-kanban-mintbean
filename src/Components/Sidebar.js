@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import uuid from "uuid/v4";
 import CreateColumn from "./CreateColumn";
-import { addColumn, toggleWarningModal } from "../actions";
+import { addColumn, toggleWarningModal, toggleClearAllModal } from "../actions";
 import COLORS from "./COLORS";
 import { FiArrowLeft, FiEdit, FiTrash2, FiXOctagon } from "react-icons/fi";
 
@@ -145,8 +145,7 @@ const Sidebar = () => {
             >
               <Button
                 onClick={() => {
-                  window.localStorage.clear();
-                  // dispatch(toggleWarningModal());
+                  dispatch(toggleClearAllModal());
                 }}
               >
                 <FiXOctagon size={36} />

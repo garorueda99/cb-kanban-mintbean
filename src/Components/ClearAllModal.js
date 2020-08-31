@@ -10,27 +10,28 @@ import "tippy.js/themes/material.css";
 import "tippy.js/animations/scale-subtle.css";
 
 import COLORS from "./COLORS";
-import { deleteAllTasks, toggleWarningModal } from "../actions";
+import { deleteEverything, toggleClearAllModal } from "../actions";
 
-const WarningModal = (props) => {
+const ClearAllModal = (props) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
 
   const handleClose = () => {
-    dispatch(toggleWarningModal());
+    dispatch(toggleClearAllModal());
   };
 
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(toggleWarningModal());
-    dispatch(deleteAllTasks());
+    window.localStorage.clear();
+    dispatch(toggleClearAllModal());
+    dispatch(deleteEverything());
   };
 
   return (
     <Dialog
       onClose={handleClose}
       aria-labelledby="warning"
-      open={state.openModal}
+      open={state.openClearAllModal}
     >
       <ModalContentWrapper>
         <div style={{ paddingBottom: 20 }}>
@@ -51,7 +52,7 @@ const WarningModal = (props) => {
             }}
           >
             <p style={{ color: "grey" }}>
-              This will delete all tasks from your kanban board.
+              This will delete all content from your kanban board.
             </p>
           </div>
         </div>
@@ -125,4 +126,4 @@ const ClosedButton = styled.button`
   }
 `;
 
-export default WarningModal;
+export default ClearAllModal;
