@@ -58,35 +58,8 @@ const ClearAllModal = (props) => {
         </div>
 
         <ButtonWrapper>
-          <Tippy
-            content={"Yes"}
-            placement="top"
-            animation="scale-subtle"
-            theme="material"
-            arrow={true}
-            duration={200}
-            delay={[400, 0]}
-            distance={8}
-          >
-            <AddButton onClick={handleClick}>
-              <FiPlusCircle size={32} />
-            </AddButton>
-          </Tippy>
-
-          <Tippy
-            content={"Cancel"}
-            placement="top"
-            animation="scale-subtle"
-            theme="material"
-            arrow={true}
-            duration={200}
-            delay={[400, 0]}
-            distance={8}
-          >
-            <ClosedButton onClick={handleClose}>
-              <FiXCircle size={32} />
-            </ClosedButton>
-          </Tippy>
+          <AddButton onClick={handleClick}>Okay</AddButton>
+          <ClosedButton onClick={handleClose}>Cancel</ClosedButton>
         </ButtonWrapper>
       </ModalContentWrapper>
     </Dialog>
@@ -103,26 +76,58 @@ const ButtonWrapper = styled.div`
 `;
 
 const AddButton = styled.button`
-  background: transparent;
-  border: none;
+  font-size: 22px;
+  padding: 8px 12px;
+  background-color: white;
+  border: 3px solid transparent;
   cursor: pointer;
+  border-radius: 15px;
   color: ${COLORS.btnAdd};
 
   &:active {
     transform: scale(1.1);
     color: ${COLORS.btnAdd};
   }
+
+  &:hover {
+    border: 3px solid ${COLORS.btnAdd};
+    background-color: ${COLORS.btnAdd};
+    color: white;
+  }
+
+  &:focus {
+    outline: none;
+    border: 3px solid ${COLORS.btnAdd};
+    background-color: ${COLORS.btnAdd};
+    color: white;
+  }
 `;
 
 const ClosedButton = styled.button`
-  background: transparent;
-  border: none;
+  font-size: 22px;
+  padding: 8px 12px;
+  background-color: white;
+  border: 3px solid transparent;
   cursor: pointer;
+  border-radius: 15px;
   color: ${COLORS.btnClose};
 
   &:active {
     transform: scale(1.1);
     color: ${COLORS.btnClose};
+  }
+
+  &:hover {
+    border: 3px solid ${COLORS.btnClose};
+    background-color: ${COLORS.btnClose};
+    color: white;
+  }
+
+  &:focus {
+    outline: none;
+    border: 3px solid ${COLORS.btnClose};
+    background-color: ${COLORS.btnClose};
+    color: white;
   }
 `;
 
