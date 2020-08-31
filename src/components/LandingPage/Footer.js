@@ -5,7 +5,20 @@ import COLORS from "../COLORS";
 const Footer = () => {
   return (
     <Wrapper>
-      <FooterTitle>This is only a demo</FooterTitle>
+      <FooterTitle>
+        Reduced by the Reducers{": "}
+        <Link href="https://github.com/garorueda99" target="_blank">
+          Andres Rueda
+        </Link>
+        ,{" "}
+        <Link href="https://github.com/donnyesq" target="_blank">
+          Adonis Lahlou
+        </Link>
+        , and{" "}
+        <Link href="https://github.com/g-thinh" target="_blank">
+          Gia Thinh Nguyen
+        </Link>
+      </FooterTitle>
     </Wrapper>
   );
 };
@@ -26,6 +39,14 @@ const FooterTitle = styled.h1`
   color: white;
   font-size: 16px;
   font-weight: 400;
+`;
+
+const Link = styled.a`
+  text-decoration: none;
+  color: inherit;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 export default Footer;
