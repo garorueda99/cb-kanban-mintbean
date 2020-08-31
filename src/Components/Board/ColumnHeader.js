@@ -139,7 +139,7 @@ export const ColumnHeader = ({
         onClose={warningMsgClose}
       >
         <Alert onClose={warningMsgClose} severity="warning">
-          Unable to remove, there are task(s) in this column.
+          Unable to remove, there are tasks in this column.
         </Alert>
       </Snackbar>
       <Snackbar
