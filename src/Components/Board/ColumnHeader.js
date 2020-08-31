@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import uuid from 'uuid/v4';
 
 import { addCard, removeColumn } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -72,10 +73,7 @@ export const ColumnHeader = ({
         <AddButton
           onClick={() => {
             console.log('====>', columns[id].items.length, columns[id].items);
-            dispatch(addCard(id));
-            setColumnCard(id);
-            setCardItem(columns[id].items[columns[id].items.length - 1]);
-            // setCardStatus((n) => !n);
+            dispatch(addCard(id, uuid()));
           }}
         >
           <FiPlusCircle size={32} />

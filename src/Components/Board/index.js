@@ -1,24 +1,24 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import Card from "../Card";
-import Sidebar from "../Sidebar";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import Card from '../Card';
+import Sidebar from '../Sidebar';
+import { useSelector } from 'react-redux';
 import {
   updateColumnPositionH,
   updateColumnPositionV,
   toggleBoardForm,
   updateBoardName,
   deleteCard,
-} from "../../actions";
-import { useDispatch } from "react-redux";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import COLORS from "../COLORS";
-import { BiEdit } from "react-icons/bi";
-import { AiOutlineDelete } from "react-icons/ai";
+} from '../../actions';
+import { useDispatch } from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import COLORS from '../COLORS';
+import { BiEdit } from 'react-icons/bi';
+import { AiOutlineDelete } from 'react-icons/ai';
 
 //## COMPONENTS ##
-import { ColumnHeader } from "./ColumnHeader";
+import { ColumnHeader } from './ColumnHeader';
 
 const Board = () => {
   const dispatch = useDispatch();
@@ -31,6 +31,12 @@ const Board = () => {
   });
 
   const state = useSelector((state) => state);
+
+  useEffect(() => {
+    setColumnCard(id);
+    setCardItem(columns[id].items[columns[id].items.length - 1]);
+    setCardStatus((n) => !n);
+  });
 
   const onDragEnd = (result, columns) => {
     if (!result.destination) return;
@@ -67,7 +73,7 @@ const Board = () => {
   };
 
   React.useEffect(() => {
-    if (window.location.pathname === "/board") {
+    if (window.location.pathname === '/board') {
       dispatch(toggleBoardForm());
     }
   }, []);
@@ -87,9 +93,9 @@ const Board = () => {
       <BoardContainer>
         <BoardTitle
           onChange={(ev) => dispatch(updateBoardName(ev.target.value))}
-          type="text"
+          type='text'
           value={boardName}
-          placeholder={"Enter Project Name"}
+          placeholder={'Enter Project Name'}
         />
         <ColumnsContainer>
           <DragDropContext onDragEnd={(result) => onDragEnd(result, columns)}>
@@ -104,6 +110,7 @@ const Board = () => {
                     setCardStatus={setCartStatus}
                     setCardItem={setCardItem}
                     setColumnCard={setColumnCard}
+                    columnCard={columnCard}
                   />
                   <Droppable droppableId={columnId} key={columnId}>
                     {(provided, snapshot) => {
@@ -132,8 +139,8 @@ const Board = () => {
                                       {...provided.dragHandleProps}
                                       style={{
                                         boxShadow: snapshot.isDragging
-                                          ? "0px 0px 13px -1px rgba(168,168,168,0.6)"
-                                          : "0px 0px 13px -1px rgba(168,168,168,0.3)",
+                                          ? '0px 0px 13px -1px rgba(168,168,168,0.6)'
+                                          : '0px 0px 13px -1px rgba(168,168,168,0.3)',
                                         ...provided.draggableProps.style,
                                       }}
                                     >
@@ -141,7 +148,7 @@ const Board = () => {
                                       <TaskWrapper>
                                         <span
                                           style={{
-                                            minWidth: "190px",
+                                            minWidth: '190px',
                                           }}
                                         >
                                           {item.content}
@@ -213,15 +220,11 @@ const Wrapper = styled.div`
 const BoardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   /* border: 5px solid red; */
-  height: 100vh;
-  margin: 0 auto;
 `;
 
 const BoardTitle = styled.input`
-  position: relative;
   text-align: center;
   padding: 12px;
   font-size: 32px;

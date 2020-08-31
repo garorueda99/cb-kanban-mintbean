@@ -90,10 +90,10 @@ export default function columnReducer(state = initialState, action) {
     }
 
     case 'ADD_CARD': {
-      const { columnId } = action;
+      const { columnId, newCardId } = action;
       return produce(state, (draftState) => {
         draftState.columns[columnId].items.push({
-          id: uuid(),
+          id: newCardId,
           content: 'New Task',
         });
       });

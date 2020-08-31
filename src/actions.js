@@ -4,9 +4,10 @@ export const addColumn = (column, id) => ({
   id,
 });
 
-export const addCard = (columnId) => ({
+export const addCard = (columnId, newCardId) => ({
   type: 'ADD_CARD',
   columnId,
+  newCardId,
 });
 
 export const saveCardInfo = (columnId, item, info, title) => ({
