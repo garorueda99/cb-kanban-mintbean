@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import { addCard, removeColumn } from "../../actions";
+import { addCard, removeColumn, toggleRemoveColumn } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { FiPlusCircle, FiXCircle } from "react-icons/fi";
 import COLORS from "../COLORS";
@@ -40,6 +40,7 @@ export const ColumnHeader = ({
   setColumnCard,
 }) => {
   const columns = useSelector((state) => state.columns);
+  const toggleDelete = useSelector((state) => state.toggleDelete);
   const [formName, setFormName] = useState(name);
   const [toggleWarning, setToggleWarning] = React.useState(false);
   const [toggleRemove, setToggleRemove] = React.useState(false);
@@ -57,12 +58,14 @@ export const ColumnHeader = ({
     }
     setToggleWarning(false);
   };
+  // ############################# DELETE MSG #######################
 
   //############################# DELETE MODAL ###############################
 
   const deleteMsgOpen = () => {
-    console.log("Hello there");
+    console.log("This is the state before", toggleRemove);
     setToggleRemove(true);
+    console.log("This is the state after", toggleRemove);
   };
 
   const deleteMsgClose = (event, reason) => {
@@ -121,7 +124,7 @@ export const ColumnHeader = ({
           onClick={() => {
             if (isEmpty) {
               dispatch(removeColumn(id));
-              deleteMsgOpen();
+              dispatch(toggleRemoveColumn());
             } else {
               warningMsgOpen();
             }
@@ -140,11 +143,11 @@ export const ColumnHeader = ({
         </Alert>
       </Snackbar>
       <Snackbar
-        open={toggleRemove}
+        open={toggleDelete}
         autoHideDuration={2000}
-        onClose={deleteMsgClose}
+        onClose={() => dispatch(toggleRemoveColumn())}
       >
-        <Alert onClose={deleteMsgClose} severity="error">
+        <Alert onClose={() => dispatch(toggleRemoveColumn())} severity="error">
           Column was removed.
         </Alert>
       </Snackbar>

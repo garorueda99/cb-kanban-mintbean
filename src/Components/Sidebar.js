@@ -26,6 +26,7 @@ function Alert(props) {
 const Sidebar = () => {
   const [isMaxCols, setIsMaxCols] = React.useState(false);
   const [addCol, setAddCol] = React.useState(false);
+
   const id = uuid();
   let name = "New column";
   const dispatch = useDispatch();
