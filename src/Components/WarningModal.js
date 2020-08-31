@@ -41,7 +41,7 @@ const WarningModal = (props) => {
               marginBottom: 40,
             }}
           >
-            <h1 style={{ fontSize: 24 }}>Are you sure?</h1>
+            <h1 style={{ fontSize: 24 }}>Delete all Tasks?</h1>
           </div>
           <div
             style={{
@@ -51,7 +51,7 @@ const WarningModal = (props) => {
             }}
           >
             <p style={{ color: "grey" }}>
-              This will delete all tasks from your kanban board.
+              This will remove all tasks from your kanban board.
             </p>
           </div>
         </div>

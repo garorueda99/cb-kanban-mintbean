@@ -42,7 +42,7 @@ const ClearAllModal = (props) => {
               marginBottom: 40,
             }}
           >
-            <h1 style={{ fontSize: 24 }}>Are you sure?</h1>
+            <h1 style={{ fontSize: 24 }}>Reset the Board?</h1>
           </div>
           <div
             style={{
