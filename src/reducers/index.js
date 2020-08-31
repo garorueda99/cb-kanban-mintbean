@@ -167,28 +167,34 @@ export default function columnReducer(state = initialState, action) {
     }
 
     case "DELETE_EVERYTHING": {
-      return produce(state, (draftState) => {
-        draftState = {
-          columns: {
-            [uuid()]: {
-              name: "To do",
-              items: [],
-            },
-            [uuid()]: {
-              name: "In Progress",
-              items: [],
-            },
-            [uuid()]: {
-              name: "Completed",
-              items: [],
-            },
+      return {
+        columns: {
+          [uuid()]: {
+            name: "To do",
+            items: [],
           },
-        };
-      });
+          [uuid()]: {
+            name: "In Progress",
+            items: [],
+          },
+          [uuid()]: {
+            name: "Completed",
+            items: [],
+          },
+        },
+        openModal: false,
+        kanbanForm: false,
+        kanbanName: undefined,
+        toggleDelete: false,
+        openClearAllModal: true,
+        cardModal: false,
+      };
     }
 
     case "TOGGLE_CLEAR_ALL_MODAL": {
       return produce(state, (draftState) => {
+        console.log("in reducer");
+        console.log("----", state);
         draftState.openClearAllModal = !draftState.openClearAllModal;
       });
     }

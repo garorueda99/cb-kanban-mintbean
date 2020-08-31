@@ -145,6 +145,7 @@ const Sidebar = () => {
             >
               <Button
                 onClick={() => {
+                  console.log("click");
                   dispatch(toggleClearAllModal());
                 }}
               >
