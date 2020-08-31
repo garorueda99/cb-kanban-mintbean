@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   /* border: 5px solid pink; */
   display: flex;
   position: relative;
-  bottom: 0;
+  /* bottom: 0; */
   justify-content: center;
   align-items: center;
   background-color: ${COLORS.btnPrimary};

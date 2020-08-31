@@ -3,7 +3,7 @@ import styled from "styled-components/macro";
 
 import { Link } from "react-router-dom";
 
-import test from "../../assets/test.gif";
+import Hero from "../../assets/Hero.jpg";
 
 import COLORS from "../COLORS";
 
@@ -26,7 +26,7 @@ export const ContentHero = () => {
           </ButtonContainer>
         </Column>
         <Column>
-          <Animation src={test} />
+          <Animation src={Hero} alt="cta pic" />
         </Column>
       </CardContainer>
     </Wrapper>
@@ -61,6 +61,11 @@ const Text = styled.p`
 const Animation = styled.img`
   position: relative;
   width: 100%;
+  border-radius: 80%;
+
+  @media (max-width: 860px) {
+    width: 70%;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -80,7 +85,11 @@ const CardContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 5%;
+  margin: 5% 0;
   min-height: 80vh;
+  /* border: 2px solid gainsboro;
+  border-radius: 12px;
+  box-shadow: 0px 1px 1px 2px rgba(211, 211, 211, 0.75); */
 
   @media (max-width: 860px) {
     display: flex;

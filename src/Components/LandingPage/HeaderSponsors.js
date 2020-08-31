@@ -48,11 +48,20 @@ export const HeaderSponsors = () => {
 };
 
 const LogoContainer = styled.div`
+  display: none;
   position: relative;
   margin-right: 20px;
   /* border: 5px solid red; */
   /* background: white; */
   /* min-height: 5vh; */
+
+  @media (max-width: 1200px) {
+    display: block;
+  }
+
+  @media (max-width: 860px) {
+    display: none;
+  }
 `;
 
 const LogoList = styled.ul`

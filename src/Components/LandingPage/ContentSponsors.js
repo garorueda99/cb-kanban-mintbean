@@ -6,9 +6,12 @@ import cuLogo from "../../assets/cuLogo.png";
 import fpLogo from "../../assets/fpLogo.png";
 import mbLogo from "../../assets/mbLogo.jpg";
 
+import COLORS from "../COLORS";
+
 export const ContentSponsors = () => {
   return (
     <LogoContainer>
+      <Title>Our Affiliates</Title>
       <LogoList>
         <li>
           <Link
@@ -47,8 +50,17 @@ export const ContentSponsors = () => {
   );
 };
 
+const Title = styled.h1`
+  font-size: 44px;
+  text-align: center;
+  font-weight: 400;
+  margin-bottom: 50px;
+  color: ${COLORS.outlineGrey};
+`;
+
 const LogoContainer = styled.div`
   position: relative;
+  margin: 20vh 0;
   /* border: 5px solid red; */
   /* background: white; */
   /* min-height: 5vh; */
@@ -62,12 +74,22 @@ const LogoList = styled.ul`
   background-color: white;
   padding: 2%;
   margin: 3em 0;
+
+  @media (max-width: 1150px) {
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+  }
 `;
 
 const Logo = styled.img`
   width: 100px;
   height: 100%;
   opacity: 0.75;
+
+  @media (max-width: 1150px) {
+    /* flex-direction: column; */
+    width: 70px;
+  }
 `;
 
 const Link = styled.a`
