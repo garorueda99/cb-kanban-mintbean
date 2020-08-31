@@ -1,43 +1,44 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import styled from 'styled-components';
-import Dialog from '@material-ui/core/Dialog';
-import { FiPlusCircle, FiXCircle } from 'react-icons/fi';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
-import 'tippy.js/themes/material.css';
-import 'tippy.js/animations/scale-subtle.css';
+import styled from "styled-components";
+import Dialog from "@material-ui/core/Dialog";
+import { FiPlusCircle, FiXCircle } from "react-icons/fi";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/material.css";
+import "tippy.js/animations/scale-subtle.css";
 
-import COLORS from './COLORS';
-import { deleteAllTasks, toggleWarningModal } from '../actions';
+import COLORS from "./COLORS";
+import { deleteEverything, toggleClearAllModal } from "../actions";
 
-const WarningModal = (props) => {
+const ClearAllModal = (props) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
 
   const handleClose = () => {
-    dispatch(toggleWarningModal());
+    dispatch(toggleClearAllModal());
   };
 
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(toggleWarningModal());
-    dispatch(deleteAllTasks());
+    window.localStorage.clear();
+    dispatch(deleteEverything());
+    dispatch(toggleClearAllModal());
   };
 
   return (
     <Dialog
       onClose={handleClose}
-      aria-labelledby='warning'
-      open={state.openModal}
+      aria-labelledby="warning"
+      open={state.openClearAllModal}
     >
       <ModalContentWrapper>
         <div style={{ paddingBottom: 20 }}>
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'center',
+              display: "flex",
+              justifyContent: "center",
               marginBottom: 40,
             }}
           >
@@ -45,23 +46,23 @@ const WarningModal = (props) => {
           </div>
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'center',
+              display: "flex",
+              justifyContent: "center",
               marginBottom: 30,
             }}
           >
-            <p style={{ color: 'grey' }}>
-              This will delete all tasks from your kanban board.
+            <p style={{ color: "grey" }}>
+              This will delete all content from your kanban board.
             </p>
           </div>
         </div>
 
         <ButtonWrapper>
           <Tippy
-            content={'Yes'}
-            placement='top'
-            animation='scale-subtle'
-            theme='material'
+            content={"Yes"}
+            placement="top"
+            animation="scale-subtle"
+            theme="material"
             arrow={true}
             duration={200}
             delay={[400, 0]}
@@ -73,10 +74,10 @@ const WarningModal = (props) => {
           </Tippy>
 
           <Tippy
-            content={'Cancel'}
-            placement='top'
-            animation='scale-subtle'
-            theme='material'
+            content={"Cancel"}
+            placement="top"
+            animation="scale-subtle"
+            theme="material"
             arrow={true}
             duration={200}
             delay={[400, 0]}
@@ -125,4 +126,4 @@ const ClosedButton = styled.button`
   }
 `;
 
-export default WarningModal;
+export default ClearAllModal;

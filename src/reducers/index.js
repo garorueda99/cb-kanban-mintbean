@@ -31,6 +31,8 @@ const initialState = JSON.parse(
   kanbanForm: false,
   kanbanName: undefined,
   toggleDelete: false,
+  openClearAllModal: false,
+  cardModal: false,
 };
 
 export default function columnReducer(state = initialState, action) {
@@ -142,6 +144,12 @@ export default function columnReducer(state = initialState, action) {
       });
     }
 
+    case 'TOGGLE_CARD_MODAL': {
+      return produce(state, (draftState) => {
+        draftState.cardModal = !draftState.cardModal;
+      });
+    }
+
     case 'UPDATE_BOARD_NAME': {
       const result = produce(state, (draftState) => {
         draftState.kanbanName = action.name;
@@ -155,6 +163,40 @@ export default function columnReducer(state = initialState, action) {
         arr.forEach((id) => {
           draftState.columns[id].items = [];
         });
+      });
+    }
+
+    case 'DELETE_EVERYTHING': {
+      return {
+        columns: {
+          [uuid()]: {
+            name: 'To do',
+            items: [],
+          },
+          [uuid()]: {
+            name: 'In Progress',
+            items: [],
+          },
+          [uuid()]: {
+            name: 'Completed',
+            items: [],
+          },
+        },
+        openModal: false,
+        kanbanForm: false,
+        kanbanName: undefined,
+        toggleDelete: false,
+        openClearAllModal: true,
+        cardModal: false,
+      };
+    }
+
+    case 'TOGGLE_CLEAR_ALL_MODAL': {
+      console.log(state.openClearAllModal);
+      return produce(state, (draftState) => {
+        console.log('in reducer');
+        console.log('----', state);
+        draftState.openClearAllModal = !draftState.openClearAllModal;
       });
     }
 
