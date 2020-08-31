@@ -2,17 +2,10 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import uuid from 'uuid/v4';
 
-<<<<<<< HEAD
 import { addCard, removeColumn } from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { FiPlusCircle, FiXCircle } from 'react-icons/fi';
 import COLORS from '../COLORS';
-=======
-import { addCard, removeColumn, toggleRemoveColumn } from "../../actions";
-import { useDispatch, useSelector } from "react-redux";
-import { FiPlusCircle, FiXCircle } from "react-icons/fi";
-import COLORS from "../COLORS";
->>>>>>> 910f3aa328282b9f8847a6b689f47d8c9fb73761
 
 // ## FOR SNACKBAR MESSAGES
 import Button from '@material-ui/core/Button';
@@ -48,7 +41,6 @@ export const ColumnHeader = ({
   setColumnCard,
 }) => {
   const columns = useSelector((state) => state.columns);
-  const toggleDelete = useSelector((state) => state.toggleDelete);
   const [formName, setFormName] = useState(name);
   const [toggleWarning, setToggleWarning] = React.useState(false);
   const [toggleRemove, setToggleRemove] = React.useState(false);
@@ -66,18 +58,12 @@ export const ColumnHeader = ({
     }
     setToggleWarning(false);
   };
-  // ############################# DELETE MSG #######################
 
   //############################# DELETE MODAL ###############################
 
   const deleteMsgOpen = () => {
-<<<<<<< HEAD
     console.log('Hello there');
-=======
-    console.log("This is the state before", toggleRemove);
->>>>>>> 910f3aa328282b9f8847a6b689f47d8c9fb73761
     setToggleRemove(true);
-    console.log("This is the state after", toggleRemove);
   };
 
   const deleteMsgClose = (event, reason) => {
@@ -103,8 +89,14 @@ export const ColumnHeader = ({
       >
         <AddButton
           onClick={() => {
-            console.log('====>', columns[id].items.length, columns[id].items);
-            dispatch(addCard(id, uuid()));
+            const newCardId = uuid();
+            dispatch(addCard(id, newCardId));
+            setColumnCard(id);
+            setCardItem({
+              id: newCardId,
+              content: 'New Task',
+            });
+            setCardStatus((n) => !n);
           }}
         >
           <FiPlusCircle size={32} />
@@ -132,15 +124,8 @@ export const ColumnHeader = ({
         <ClosedButton
           onClick={() => {
             if (isEmpty) {
-<<<<<<< HEAD
-              console.log(toggleRemove);
-              setToggleRemove((n) => !n);
-              // dispatch(removeColumn(id));
-              // deleteMsgOpen();
-=======
               dispatch(removeColumn(id));
-              dispatch(toggleRemoveColumn());
->>>>>>> 910f3aa328282b9f8847a6b689f47d8c9fb73761
+              deleteMsgOpen();
             } else {
               warningMsgOpen();
             }
@@ -159,15 +144,11 @@ export const ColumnHeader = ({
         </Alert>
       </Snackbar>
       <Snackbar
-        open={toggleDelete}
+        open={toggleRemove}
         autoHideDuration={2000}
-        onClose={() => dispatch(toggleRemoveColumn())}
+        onClose={deleteMsgClose}
       >
-<<<<<<< HEAD
         <Alert onClose={deleteMsgClose} severity='error'>
-=======
-        <Alert onClose={() => dispatch(toggleRemoveColumn())} severity="error">
->>>>>>> 910f3aa328282b9f8847a6b689f47d8c9fb73761
           Column was removed.
         </Alert>
       </Snackbar>

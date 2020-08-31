@@ -23,7 +23,7 @@ import { ColumnHeader } from './ColumnHeader';
 const Board = () => {
   const dispatch = useDispatch();
   const columns = useSelector((state) => state.columns);
-  const [cardStatus, setCartStatus] = useState(false);
+  const [cardStatus, setCardStatus] = useState(false);
   const [cardItem, setCardItem] = useState(false);
   const [columnCard, setColumnCard] = useState(null);
   const boardName = useSelector((state) => {
@@ -101,7 +101,7 @@ const Board = () => {
                     id={columnId}
                     name={column.name}
                     isEmpty={hasTasks}
-                    setCardStatus={setCartStatus}
+                    setCardStatus={setCardStatus}
                     setCardItem={setCardItem}
                     setColumnCard={setColumnCard}
                     columnCard={columnCard}
@@ -158,7 +158,7 @@ const Board = () => {
                                         </MiniButton>
                                         <MiniButton
                                           onClick={() => {
-                                            setCartStatus((n) => !n);
+                                            setCardStatus((n) => !n);
                                             setCardItem(item);
                                             setColumnCard(columnId);
                                           }}
@@ -188,7 +188,7 @@ const Board = () => {
         <Card
           item={cardItem}
           cardStatus={cardStatus}
-          setCardStatus={setCartStatus}
+          setCardStatus={setCardStatus}
           columnId={columnCard}
         />
       )}
