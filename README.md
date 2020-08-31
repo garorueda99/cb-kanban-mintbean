@@ -85,7 +85,7 @@ No need for peer review if you know for sure this wont brick anything. Once you 
 
 - ~~Snackbar messages (max 6 columns)~~ - (Thinh)
 
-- Animation for drag-drop tasks - (Adonis)
+- ~~Animation for drag-drop tasks - (Adonis)
 
 - Styling Card + Modal - (Adonis)
 
@@ -112,5 +112,7 @@ No need for peer review if you know for sure this wont brick anything. Once you 
 - The user can add images as attachments to the cards (yes, it is possible to save images to localstorage, https://stackoverflow.com/questions/19183180/how-to-save-an-image-to-localstorage-and-display-it-on-the-next-page)
 
 - ~~Data is saved to LocalStorage or IndexedDB (to avoid collisions when using FeaturePeek, please use a unique name for the namespace you're saving your data to)~~ - (Adonis)
+
+- Clear localStorage - (Adonis)
 
 - Tutorial on the landing Page (IMPORTANT! - Thinh)
