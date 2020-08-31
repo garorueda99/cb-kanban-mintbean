@@ -8,6 +8,7 @@ const MainContent = () => {
   return (
     <Wrapper>
       <ContentHero />
+      <ContentCarousel />
     </Wrapper>
   );
 };
