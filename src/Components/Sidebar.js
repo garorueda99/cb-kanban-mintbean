@@ -178,7 +178,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  background: #003366;
+  background: ${COLORS.btnPrimary};
 `;
 
 const Container = styled.div`
@@ -186,7 +186,7 @@ const Container = styled.div`
   min-height: 100vh;
   padding: 5%;
 
-  box-shadow: 0px 2px 2px 2px rgba(211, 211, 211, 0.75);
+  /* box-shadow: 0px 2px 2px 2px rgba(211, 211, 211, 0.75); */
   border-right: 1px solid gainsboro;
 `;
 
@@ -210,7 +210,7 @@ const StyledFiArrowLeft = styled(FiArrowLeft)`
   color: white;
 
   &:hover {
-    color: #add8e6;
+    transform: scale(0.8);
   }
 `;
 
@@ -222,16 +222,15 @@ const Button = styled.button`
   color: white;
 
   &:hover {
-    color: #add8e6;
+    transform: scale(0.8);
   }
 
   &:focus {
-    color: #add8e6;
+    transform: scale(0.8);
   }
 
   &:active {
     transform: scale(1.3);
-    color: ${COLORS.btnSecondary};
   }
 `;
 
@@ -243,14 +242,11 @@ const StyledNavLink = styled(Link)`
   }
 
   &:focus {
-    outline: none;
-    /* transform: scale(1.5); */
-    color: ${COLORS.btnSecondary};
+    transform: scale(0.8);
   }
 
   &:active {
     transform: scale(1.3);
-    color: ${COLORS.btnSecondary};
   }
 `;
 
