@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { ContentHero } from "./ContentHero";
+import { ContentCarousel } from "./ContentCarousel";
 
 const MainContent = () => {
   return (

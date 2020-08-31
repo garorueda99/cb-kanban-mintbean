@@ -1,9 +1,10 @@
 import React from "react";
 import Carousel from "react-material-ui-carousel";
 import { Paper } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 
-function Example(props) {
-  var items = [
+export const ContentCarousel = (props) => {
+  const items = [
     {
       name: "Random Name #1",
       description: "Probably the most random thing you have ever seen!",
@@ -21,7 +22,7 @@ function Example(props) {
       ))}
     </Carousel>
   );
-}
+};
 
 function Item(props) {
   return (
