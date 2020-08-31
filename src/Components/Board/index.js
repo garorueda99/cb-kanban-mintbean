@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-import Card from '../Card';
-import Sidebar from '../Sidebar';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import Card from "../Card";
+import Sidebar from "../Sidebar";
+import { useSelector } from "react-redux";
 import {
   updateColumnPositionH,
   updateColumnPositionV,
   toggleBoardForm,
   updateBoardName,
   deleteCard,
-} from '../../actions';
-import { useDispatch } from 'react-redux';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import COLORS from '../COLORS';
-import { BiEdit } from 'react-icons/bi';
-import { AiOutlineDelete } from 'react-icons/ai';
+} from "../../actions";
+import { useDispatch } from "react-redux";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import COLORS from "../COLORS";
+import { BiEdit } from "react-icons/bi";
+import { AiOutlineDelete } from "react-icons/ai";
 
 //## COMPONENTS ##
-import { ColumnHeader } from './ColumnHeader';
+import { ColumnHeader } from "./ColumnHeader";
 
 const Board = () => {
   const dispatch = useDispatch();
@@ -67,7 +67,7 @@ const Board = () => {
   };
 
   React.useEffect(() => {
-    if (window.location.pathname === '/board') {
+    if (window.location.pathname === "/board") {
       dispatch(toggleBoardForm());
     }
   }, []);
@@ -87,9 +87,9 @@ const Board = () => {
       <BoardContainer>
         <BoardTitle
           onChange={(ev) => dispatch(updateBoardName(ev.target.value))}
-          type='text'
+          type="text"
           value={boardName}
-          placeholder={'Enter Project Name'}
+          placeholder={"Enter Project Name"}
         />
         <ColumnsContainer>
           <DragDropContext onDragEnd={(result) => onDragEnd(result, columns)}>
@@ -133,8 +133,8 @@ const Board = () => {
                                       {...provided.dragHandleProps}
                                       style={{
                                         boxShadow: snapshot.isDragging
-                                          ? '0px 0px 13px -1px rgba(168,168,168,0.6)'
-                                          : '0px 0px 13px -1px rgba(168,168,168,0.3)',
+                                          ? "0px 0px 13px -1px rgba(168,168,168,0.6)"
+                                          : "0px 0px 13px -1px rgba(168,168,168,0.3)",
                                         ...provided.draggableProps.style,
                                       }}
                                     >
@@ -142,7 +142,7 @@ const Board = () => {
                                       <TaskWrapper>
                                         <span
                                           style={{
-                                            minWidth: '190px',
+                                            minWidth: "190px",
                                           }}
                                         >
                                           {item.content}
@@ -249,9 +249,9 @@ const ColumnsContainer = styled.div`
   overflow: auto;
   padding: 0 20px;
 
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  scrollbar-width: none; /* Firefox */
-  &::-webkit-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  / &::-webkit-scrollbar {
     width: 0;
     display: none;
   }
@@ -262,11 +262,12 @@ const ColumnsContainer = styled.div`
     justify-content: center;
   }
 
-  @media (max-width: 600px) {
+  /* @media (max-width: 600px) {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-  }
+    align-items: center;
+  } */
 `;
 
 const ColumnContainer = styled.div`
@@ -283,9 +284,9 @@ const ColumnContainer = styled.div`
 
 const TasksContainer = styled.div`
   padding: 4px;
-  min-width: 300px;
-  min-height: 500px;
-  max-height: 800px;
+  min-width: 350px;
+  min-height: 400px;
+  max-height: 650px;
   margin: 5px;
   overflow: auto;
 
@@ -294,6 +295,12 @@ const TasksContainer = styled.div`
   &::-webkit-scrollbar {
     width: 0;
     display: none;
+  }
+
+  @media (max-width: 1200px) {
+    min-width: 300px;
+    min-height: 50vh;
+    max-height: 300px;
   }
 `;
 
