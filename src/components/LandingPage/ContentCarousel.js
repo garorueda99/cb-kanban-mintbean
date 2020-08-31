@@ -67,6 +67,7 @@ const Animation = styled.img`
 
   @media (max-width: 1150px) {
     /* width: 700px; */
+    width: 100%;
     margin: 0 auto;
   }
 `;
