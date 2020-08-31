@@ -27,6 +27,9 @@ const Wrapper = styled.div`
 const Left = styled.div`
   margin-left: 5%;
   flex: 4;
+  @media (max-width: 700px) {
+    margin-left: 0;
+  }
 `;
 
 const Right = styled.div`
@@ -34,6 +37,10 @@ const Right = styled.div`
   justify-content: flex-end;
   margin-right: 5%;
   flex: 6;
+
+  @media (max-width: 700px) {
+    display: none;
+  }
 `;
 
 const PageTitle = styled.h1`
@@ -43,7 +50,8 @@ const PageTitle = styled.h1`
   color: ${COLORS.btnPrimary};
 
   @media (max-width: 700px) {
-    font-size: 20px;
+    font-size: 38px;
+    text-align: center;
   }
 `;
 
