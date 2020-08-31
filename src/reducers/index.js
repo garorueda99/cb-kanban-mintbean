@@ -30,6 +30,7 @@ const initialState = JSON.parse(
   openModal: false,
   kanbanForm: false,
   kanbanName: undefined,
+  toggleDelete: false,
 };
 
 export default function columnReducer(state = initialState, action) {
@@ -126,6 +127,12 @@ export default function columnReducer(state = initialState, action) {
     case 'TOGGLE_WARNING_MODAL': {
       return produce(state, (draftState) => {
         draftState.openModal = !draftState.openModal;
+      });
+    }
+
+    case 'TOGGLE_REMOVE_COLUMN': {
+      return produce(state, (draftState) => {
+        draftState.toggleDelete = !draftState.toggleDelete;
       });
     }
 

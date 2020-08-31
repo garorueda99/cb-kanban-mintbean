@@ -32,12 +32,6 @@ const Board = () => {
 
   const state = useSelector((state) => state);
 
-  // useEffect(() => {
-  //   setColumnCard(id);
-  //   setCardItem(columns[id].items[columns[id].items.length - 1]);
-  //   setCardStatus((n) => !n);
-  // });
-
   const onDragEnd = (result, columns) => {
     if (!result.destination) return;
     const { source, destination } = result;

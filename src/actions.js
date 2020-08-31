@@ -69,6 +69,10 @@ export const toggleBoardForm = () => ({
   type: 'TOGGLE_BOARD_FORM',
 });
 
+export const toggleRemoveColumn = () => ({
+  type: 'TOGGLE_REMOVE_COLUMN',
+});
+
 export const updateBoardName = (name) => ({
   type: 'UPDATE_BOARD_NAME',
   name,
