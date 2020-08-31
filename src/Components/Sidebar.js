@@ -6,7 +6,7 @@ import uuid from "uuid/v4";
 import CreateColumn from "./CreateColumn";
 import { addColumn, toggleWarningModal } from "../actions";
 import COLORS from "./COLORS";
-import { FiArrowLeft, FiEdit, FiTrash2 } from "react-icons/fi";
+import { FiArrowLeft, FiEdit, FiTrash2, FiXOctagon } from "react-icons/fi";
 
 // ## TIPPY TOOLTIPS ##
 import Tippy from "@tippyjs/react";
@@ -37,7 +37,6 @@ const Sidebar = () => {
   };
 
   const state = useSelector((state) => state);
-  // console.log("we have this many columns", Object.keys(state.columns).length);
 
   const numCols = Object.keys(state.columns).length;
 
@@ -83,7 +82,7 @@ const Sidebar = () => {
               distance={8}
             >
               <StyledNavLink to="/">
-                <FiArrowLeft size={36} />
+                <StyledFiArrowLeft size={36} />
               </StyledNavLink>
             </Tippy>
           </li>
@@ -104,7 +103,6 @@ const Sidebar = () => {
                     addColMsgOpen();
                     dispatch(addColumn(column, id));
                   } else {
-                    // window.alert("Too many columns");
                     maxColsMsgOpen();
                   }
                 }}
@@ -133,6 +131,28 @@ const Sidebar = () => {
               </Button>
             </Tippy>
           </li>
+
+          <li>
+            <Tippy
+              content={"Clear board"}
+              placement="right"
+              animation="scale-subtle"
+              theme="material"
+              arrow={true}
+              duration={200}
+              delay={[400, 0]}
+              distance={8}
+            >
+              <Button
+                onClick={() => {
+                  window.localStorage.clear();
+                  // dispatch(toggleWarningModal());
+                }}
+              >
+                <FiXOctagon size={36} />
+              </Button>
+            </Tippy>
+          </li>
         </SidebarList>
       </Container>
       <Snackbar
@@ -140,8 +160,8 @@ const Sidebar = () => {
         autoHideDuration={2000}
         onClose={maxColsMsgClose}
       >
-        <Alert onClose={maxColsMsgClose} severity="info">
-          Max Columns Reached.
+        <Alert onClose={maxColsMsgClose} severity="warning">
+          Maximum Number of Columns Reached.
         </Alert>
       </Snackbar>
       <Snackbar open={addCol} autoHideDuration={2000} onClose={addColMsgClose}>
@@ -158,6 +178,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  background: #003366;
 `;
 
 const Container = styled.div`
@@ -185,18 +206,27 @@ const SidebarList = styled.ul`
   }
 `;
 
+const StyledFiArrowLeft = styled(FiArrowLeft)`
+  color: white;
+
+  &:hover {
+    color: #add8e6;
+  }
+`;
+
 const Button = styled.button`
   background: transparent;
   border: none;
   outline: none;
   cursor: pointer;
+  color: white;
 
   &:hover {
-    color: ${COLORS.btnSecondary};
+    color: #add8e6;
   }
 
   &:focus {
-    color: ${COLORS.btnSecondary};
+    color: #add8e6;
   }
 
   &:active {
