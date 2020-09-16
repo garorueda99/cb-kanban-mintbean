@@ -16,9 +16,15 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import COLORS from '../COLORS';
 import { BiEdit } from 'react-icons/bi';
 import { AiOutlineDelete } from 'react-icons/ai';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 //## COMPONENTS ##
 import { ColumnHeader } from './ColumnHeader';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant='filled' {...props} />;
+}
 
 const Board = () => {
   const dispatch = useDispatch();
@@ -26,6 +32,7 @@ const Board = () => {
   const [cardStatus, setCardStatus] = useState(false);
   const [cardItem, setCardItem] = useState(false);
   const [columnCard, setColumnCard] = useState(null);
+  const [taskDeleted, setTaskDeleted] = useState(false);
   const boardName = useSelector((state) => {
     return state.kanbanName;
   });
@@ -149,6 +156,7 @@ const Board = () => {
                                         </span>
                                         <MiniButton
                                           onClick={() => {
+                                            setTaskDeleted((n) => !n);
                                             dispatch(
                                               deleteCard(columnId, item.id)
                                             );
@@ -192,6 +200,13 @@ const Board = () => {
           columnId={columnCard}
         />
       )}
+      <Snackbar
+        open={taskDeleted}
+        autoHideDuration={2000}
+        onClose={() => setTaskDeleted((n) => !n)}
+      >
+        <Alert severity='error'>Task was removed.</Alert>
+      </Snackbar>
     </Wrapper>
   );
 };
