@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { ContentHero } from "./ContentHero";
+import { ContentSponsors } from "./ContentSponsors";
 import { ContentCarousel } from "./ContentCarousel";
 
 const MainContent = () => {
@@ -9,6 +10,7 @@ const MainContent = () => {
     <Wrapper>
       <ContentHero />
       <ContentCarousel />
+      <ContentSponsors />
     </Wrapper>
   );
 };

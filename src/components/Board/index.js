@@ -16,15 +16,15 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import COLORS from '../COLORS';
 import { BiEdit } from 'react-icons/bi';
 import { AiOutlineDelete } from 'react-icons/ai';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 
 //## COMPONENTS ##
 import { ColumnHeader } from './ColumnHeader';
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant='filled' {...props} />;
-}
+// ## TIPPY TOOLTIPS ##
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/themes/material.css';
+import 'tippy.js/animations/scale-subtle.css';
 
 const Board = () => {
   const dispatch = useDispatch();
@@ -32,7 +32,6 @@ const Board = () => {
   const [cardStatus, setCardStatus] = useState(false);
   const [cardItem, setCardItem] = useState(false);
   const [columnCard, setColumnCard] = useState(null);
-  const [taskDeleted, setTaskDeleted] = useState(false);
   const boardName = useSelector((state) => {
     return state.kanbanName;
   });
@@ -154,25 +153,46 @@ const Board = () => {
                                         >
                                           {item.content}
                                         </span>
-                                        <MiniButton
-                                          onClick={() => {
-                                            setTaskDeleted((n) => !n);
-                                            dispatch(
-                                              deleteCard(columnId, item.id)
-                                            );
-                                          }}
+                                        <Tippy
+                                          content={'Delete Task'}
+                                          placement='top'
+                                          animation='scale-subtle'
+                                          theme='material'
+                                          arrow={true}
+                                          duration={200}
+                                          delay={[1000, 0]}
+                                          distance={8}
                                         >
-                                          <AiOutlineDelete />
-                                        </MiniButton>
-                                        <MiniButton
-                                          onClick={() => {
-                                            setCardStatus((n) => !n);
-                                            setCardItem(item);
-                                            setColumnCard(columnId);
-                                          }}
+                                          <MiniButton
+                                            onClick={() => {
+                                              dispatch(
+                                                deleteCard(columnId, item.id)
+                                              );
+                                            }}
+                                          >
+                                            <AiOutlineDelete />
+                                          </MiniButton>
+                                        </Tippy>
+                                        <Tippy
+                                          content={'Edit Task'}
+                                          placement='top'
+                                          animation='scale-subtle'
+                                          theme='material'
+                                          arrow={true}
+                                          duration={200}
+                                          delay={[1000, 0]}
+                                          distance={8}
                                         >
-                                          <BiEdit />
-                                        </MiniButton>
+                                          <MiniButton
+                                            onClick={() => {
+                                              setCardStatus((n) => !n);
+                                              setCardItem(item);
+                                              setColumnCard(columnId);
+                                            }}
+                                          >
+                                            <BiEdit />
+                                          </MiniButton>
+                                        </Tippy>
                                       </TaskWrapper>
                                       {/* </Card> */}
                                     </TaskItem>
@@ -200,13 +220,6 @@ const Board = () => {
           columnId={columnCard}
         />
       )}
-      <Snackbar
-        open={taskDeleted}
-        autoHideDuration={2000}
-        onClose={() => setTaskDeleted((n) => !n)}
-      >
-        <Alert severity='error'>Task was removed.</Alert>
-      </Snackbar>
     </Wrapper>
   );
 };
@@ -216,10 +229,8 @@ const Wrapper = styled.div`
   display: flex;
   /* align-items: center; */
   /* overflow: visible; */
-
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none; /* Firefox */
-
   &::-webkit-scrollbar {
     width: 0;
     display: none;
@@ -242,7 +253,6 @@ const BoardTitle = styled.input`
   color: ${COLORS.textPrimary};
   font-weight: 500;
   min-width: 200px;
-
   &::placeholder {
     opacity: 0.4;
   }
@@ -263,25 +273,23 @@ const ColumnsContainer = styled.div`
   max-height: 100vh;
   overflow: auto;
   padding: 0 20px;
-
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  scrollbar-width: none; /* Firefox */
-  &::-webkit-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  / &::-webkit-scrollbar {
     width: 0;
     display: none;
   }
-
   @media (max-width: 1200px) {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
-
-  @media (max-width: 600px) {
+  /* @media (max-width: 600px) {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-  }
+    align-items: center;
+  } */
 `;
 
 const ColumnContainer = styled.div`
@@ -298,17 +306,21 @@ const ColumnContainer = styled.div`
 
 const TasksContainer = styled.div`
   padding: 4px;
-  min-width: 300px;
-  min-height: 500px;
-  max-height: 800px;
+  min-width: 350px;
+  min-height: 400px;
+  max-height: 650px;
   margin: 5px;
   overflow: auto;
-
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none; /* Firefox */
   &::-webkit-scrollbar {
     width: 0;
     display: none;
+  }
+  @media (max-width: 1200px) {
+    min-width: 300px;
+    min-height: 50vh;
+    max-height: 300px;
   }
 `;
 
@@ -343,6 +355,9 @@ const LoadingTitle = styled.h1`
 `;
 
 const MiniButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
   padding: 0;
   border: none;
@@ -350,6 +365,17 @@ const MiniButton = styled.button`
   font-size: 24px;
   margin-right: 15px;
   cursor: pointer;
+  &:hover {
+    color: ${COLORS.btnPrimary};
+  }
+  &:active {
+    outline: none;
+    transform: scale(1.1);
+  }
+  &:focus {
+    outline: none;
+    color: ${COLORS.btnPrimary};
+  }
 `;
 
 export default Board;

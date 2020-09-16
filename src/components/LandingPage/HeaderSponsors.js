@@ -6,7 +6,7 @@ import cuLogo from "../../assets/cuLogo.png";
 import fpLogo from "../../assets/fpLogo.png";
 import mbLogo from "../../assets/mbLogo.jpg";
 
-export const ContentSponsors = () => {
+export const HeaderSponsors = () => {
   return (
     <LogoContainer>
       <LogoList>
@@ -48,10 +48,20 @@ export const ContentSponsors = () => {
 };
 
 const LogoContainer = styled.div`
+  display: none;
   position: relative;
+  margin-right: 20px;
   /* border: 5px solid red; */
   /* background: white; */
   /* min-height: 5vh; */
+
+  @media (max-width: 1200px) {
+    display: block;
+  }
+
+  @media (max-width: 860px) {
+    display: none;
+  }
 `;
 
 const LogoList = styled.ul`
@@ -60,14 +70,22 @@ const LogoList = styled.ul`
   align-items: center;
   /* border: 2px solid red; */
   background-color: white;
-  padding: 2%;
-  margin: 3em 0;
+  /* padding: 2%; */
+  margin: 0;
+
+  & li {
+    margin: 0 10%;
+  }
 `;
 
 const Logo = styled.img`
-  width: 100px;
-  height: 100%;
+  width: 30px;
+  height: 50%;
   opacity: 0.75;
+
+  @media (max-width: 700px) {
+    width: 20px;
+  }
 `;
 
 const Link = styled.a`

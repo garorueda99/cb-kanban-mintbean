@@ -182,12 +182,16 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  min-width: 60px;
+  min-width: 80px;
   min-height: 100vh;
   padding: 5%;
 
   /* box-shadow: 0px 2px 2px 2px rgba(211, 211, 211, 0.75); */
   border-right: 1px solid gainsboro;
+
+  @media (max-width: 600px) {
+    min-width: 60px;
+  }
 `;
 
 const SidebarList = styled.ul`
@@ -202,7 +206,7 @@ const SidebarList = styled.ul`
     justify-content: center;
     align-items: center;
     flex: 1;
-    margin: 15% 0;
+    margin: 25% 0;
   }
 `;
 
@@ -235,6 +239,7 @@ const Button = styled.button`
 `;
 
 const StyledNavLink = styled(Link)`
+  outline: none;
   &:hover {
     color: ${COLORS.btnSecondary};
     border-radius: 30px;

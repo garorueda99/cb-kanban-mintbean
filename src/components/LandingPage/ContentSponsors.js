@@ -6,9 +6,12 @@ import cuLogo from "../../assets/cuLogo.png";
 import fpLogo from "../../assets/fpLogo.png";
 import mbLogo from "../../assets/mbLogo.jpg";
 
-export const HeaderSponsors = () => {
+import COLORS from "../COLORS";
+
+export const ContentSponsors = () => {
   return (
     <LogoContainer>
+      <Title>Our Affiliates</Title>
       <LogoList>
         <li>
           <Link
@@ -47,9 +50,17 @@ export const HeaderSponsors = () => {
   );
 };
 
+const Title = styled.h1`
+  font-size: 44px;
+  text-align: center;
+  font-weight: 400;
+  margin-bottom: 50px;
+  color: ${COLORS.outlineGrey};
+`;
+
 const LogoContainer = styled.div`
   position: relative;
-  margin-right: 20px;
+  margin: 20vh 0;
   /* border: 5px solid red; */
   /* background: white; */
   /* min-height: 5vh; */
@@ -61,21 +72,23 @@ const LogoList = styled.ul`
   align-items: center;
   /* border: 2px solid red; */
   background-color: white;
-  /* padding: 2%; */
-  margin: 0;
+  padding: 2%;
+  margin: 3em 0;
 
-  & li {
-    margin: 0 10%;
+  @media (max-width: 1150px) {
+    /* flex-direction: column; */
+    flex-wrap: wrap;
   }
 `;
 
 const Logo = styled.img`
-  width: 30px;
-  height: 50%;
+  width: 100px;
+  height: 100%;
   opacity: 0.75;
 
-  @media (max-width: 700px) {
-    width: 20px;
+  @media (max-width: 1150px) {
+    /* flex-direction: column; */
+    width: 70px;
   }
 `;
 
