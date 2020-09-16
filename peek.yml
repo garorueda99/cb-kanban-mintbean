@@ -1,5 +1,9 @@
 version: 2
 main:
   type: static
+<<<<<<< HEAD
   path: /build
+=======
+  path: /public
+>>>>>>> 71bba0e6fcf64f12128b347d17419393402fbb4c
   spa: false

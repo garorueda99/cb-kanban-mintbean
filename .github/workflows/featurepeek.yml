@@ -3,7 +3,11 @@ name: Build and ping FeaturePeek
 on: push
 jobs:
   build:
+<<<<<<< HEAD
     runs-on: ubuntu-latest
+=======
+    runs-on: ubuntu-16.04
+>>>>>>> 71bba0e6fcf64f12128b347d17419393402fbb4c
     steps:
     - uses: actions/checkout@v2
     - name: Use node 12.x
@@ -14,6 +18,10 @@ jobs:
     - name: Install dependencies
       run: yarn install
     - name: Build
+<<<<<<< HEAD
       run: yarn build
+=======
+      run: yarn start
+>>>>>>> 71bba0e6fcf64f12128b347d17419393402fbb4c
     - name: Ping FeaturePeek
       run: bash <(curl -s https://peek.run/ci)
